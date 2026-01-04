@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "ae871df550ab2adb",
+    "type": "split",
+    "children": [
+      {
+        "id": "9e8310dbbfcc5c8b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "625028ee63d2a7e3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2_Active_Inference_Model/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b5592be1ab018abe",
+    "type": "split",
+    "children": [
+      {
+        "id": "f5100fcb5b23a95f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "550c18116d681133",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "689e8ad50a7648a2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ddbfa2d47669a917",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "49b2b02411969fd0",
+    "type": "split",
+    "children": [
+      {
+        "id": "abd7d917c5826db1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bdeccdebbb632dab",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "54b08c9f6b1071b7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "37fc35e3dd30910c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "28076aad282588ce",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "359ced3847bda3e9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "550c18116d681133",
+  "lastOpenFiles": [
+    "_Dashboard_Orientation.md",
+    "2_Active_Inference_Model/environmental_priors/Minyama_Environmental_RISC/Consumer_Resources/README.md",
+    "2_Active_Inference_Model/environmental_priors/Minyama_Environmental_RISC/Energy/README.md",
+    "2_Active_Inference_Model/environmental_priors/Minyama_Environmental_RISC/Consumer_Resources",
+    "2_Active_Inference_Model/environmental_priors/Minyama_Environmental_RISC/Energy",
+    "2_Active_Inference_Model/environmental_priors/Minyama_Environmental_RISC",
+    "2_Active_Inference_Model/environmental_priors",
+    "3_Sector_Reports/Report_Retail_Analysis.md",
+    "3_Sector_Reports/Report_Manufacturing_Analysis.md",
+    "3_Sector_Reports/Report_Healthcare_Analysis.md",
+    "3_Sector_Reports/Report_Finance_Analysis.md",
+    "3_Sector_Reports/Report_Energy_Analysis.md",
+    "3_Sector_Reports/Report_Education_Analysis.md",
+    "3_Sector_Reports/Report_Agriculture_Analysis.md",
+    "3_Sector_Reports/Report_Consumer_Resources_Analysis.md",
+    "3_Sector_Reports/Minyama_Sector_Dashboard.md",
+    "3_Sector_Reports",
+    "2_Active_Inference_Model/src/data_model/__init__.py",
+    "2_Active_Inference_Model/src/data_model/human_state_tensors.py",
+    "2_Active_Inference_Model/src/data_model/graph_representation.py",
+    "2_Active_Inference_Model/src/data_model/extraction_flows.py",
+    "2_Active_Inference_Model/src/data_model/baseline_model.py",
+    "2_Active_Inference_Model/src/data_model/Analysis_Template.md",
+    "2_Active_Inference_Model/_Dashboard.md",
+    "2_Active_Inference_Model/README.md",
+    "1_System_Schemas/Schema_Dashboard.md",
+    "1_System_Schemas/Retail_Sector_Schema.md",
+    "1_System_Schemas/README.md",
+    "1_System_Schemas/Manufacturing_Sector_Schema.md",
+    "1_System_Schemas/Healthcare_Sector_Schema.md",
+    "1_System_Schemas/Finance_Sector_Schema.md",
+    "1_System_Schemas/Education_Sector_Schema.md",
+    "1_System_Schemas/Agriculture_Sector_Schema.md",
+    "Minyama_System_Schemas/Schema_Dashboard.md",
+    "Minyama_System_Schemas/Retail_Sector_Schema.md",
+    "Minyama_System_Schemas/README.md"
+  ]
+}
