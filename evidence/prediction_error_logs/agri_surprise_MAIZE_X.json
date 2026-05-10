@@ -1,0 +1,33 @@
+{
+  "inference_metadata": {
+    "log_id": "SURPRISE_AGRI_MAIZE_X_09",
+    "timestamp": "2026-05-09T11:00:00Z",
+    "schema_ref": "schemas/agriculture/Agriculture_Sector_Schema.md",
+    "prior_ref": "evidence/environmental_priors/agri_env_LUSAKA_01_baseline.json",
+    "observation_ref": "evidence/observations/LUSAKA_SENSOR_ARRAY_09.json",
+    "confidence_level": 0.85,
+    "governance_status": "pending_review"
+  },
+  "context": {
+    "region": "Lusaka_01",
+    "entity": "MAIZE_HYBRID_X_09",
+    "metric": "soil_moisture_m3_m3"
+  },
+  "inference_data": {
+    "expected_value": 0.45,
+    "observed_value": 0.28,
+    "raw_delta": -0.17,
+    "normalized_surprise_score": 0.42,
+    "p_value": 0.003
+  },
+  "analytical_insight": {
+    "explanation": "Observed moisture is significantly lower than the prior belief for this growth stage. Rainfall was within normal parameters, suggesting a mismatch in the soil drainage_coefficient model.",
+    "severity": "HIGH",
+    "intervention_recommendation": "Phase 4: Targeted Irrigation Pulse in Zone_Lusaka_01.",
+    "sync_update_target": "schemas/agriculture/Zone.soil_model.drainage_coefficient"
+  },
+  "audit_trail": {
+    "calculated_by": "inference_engine/surprise_calculator.py",
+    "input_integrity_hash": "a4b5c6d7e8f9"
+  }
+}
