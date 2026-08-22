@@ -1,0 +1,48 @@
+domain: Education
+schema_reference: schemas/education/Education_Sector_Schema.md
+version: 1.0.0
+operational_status: active
+
+# 1. Mandatory Entities
+required_entities:
+  - Learner:
+      required_attributes: [learner_id, mastery_state_ref, engagement_level_model]
+      sync_type: agent_state
+  - KnowledgeConcept:
+      required_attributes: [concept_id, dependency_graph]
+      sync_type: ontology_node
+  - Assessment:
+      required_attributes: [assessment_id, learner_id, predicted_score_dist, actual_score]
+      sync_type: sensory_event
+
+# 2. Report Structure Requirements
+required_report_sections:
+  - Baseline Expectations:
+      content_rule: "State predicted mastery levels for target concepts."
+  - Observations:
+      content_rule: "Detail Assessment results and Interaction durations."
+  - Surprise Identification:
+      content_rule: "Identify gaps between predicted and actual MasteryState."
+  - Model Update:
+      content_rule: "Adjust the Learner's MasteryState belief map."
+
+# 3. Evidence Mapping
+evidence_sources:
+  - learning_interactions:
+      target_attributes: [engagement_level_model]
+      naming_convention: "edu_interact_{learner_id}_{date}.csv"
+  - assessment_records:
+      target_attributes: [mastery_state_ref]
+      naming_convention: "edu_assess_{assessment_id}.json"
+
+# 4. Validation Constraints
+validation_constraints:
+  - score_must_be_within_range: [0, 100]
+  - dependency_concepts_must_exist: true
+  - mastery_level_update_logic_verified: true
+
+# 5. Drift Detection Metadata
+drift_rules:
+  auto_rehardening_trigger: curriculum_update
+  dependency_depth: 3
+  verification_requirement: peer_review

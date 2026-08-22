@@ -1,0 +1,52 @@
+domain: Agriculture
+schema_reference: schemas/agriculture/Agriculture_Sector_Schema.md
+version: 1.0.0
+operational_status: active
+
+# 1. Mandatory Entities
+# Every model and report must implement these core entities.
+required_entities:
+  - Zone:
+      required_attributes: [zone_id, location_polygon, soil_model, moisture_model]
+      sync_type: static_state
+  - Crop:
+      required_attributes: [crop_id, plant_type, growth_stage_model, health_state_model]
+      sync_type: dynamic_state
+  - Intervention:
+      required_attributes: [intervention_id, intervention_type, target_zone_ref]
+      sync_type: event_log
+
+# 2. Report Structure Requirements
+# Reports in reports/analytical_outputs/ must contain these exact headers.
+required_report_sections:
+  - Baseline Expectations:
+      content_rule: "Must define the 'Normal Heartbeat' based on current Beliefs."
+  - Observations:
+      content_rule: "Must cite specific evidence records from evidence/observations/."
+  - Surprise Identification:
+      content_rule: "Must quantify the delta (Prediction Error) for Yield or Health."
+  - Model Update:
+      content_rule: "Must propose specific attribute updates for the Zone or Crop model."
+
+# 3. Evidence Mapping
+# Defines how sensory input maps to schema attributes.
+evidence_sources:
+  - environmental_priors:
+      target_attributes: [soil_model, moisture_model]
+      naming_convention: "agri_env_{zone_id}_{timestamp}.json"
+  - prediction_error_logs:
+      target_attributes: [yield_prediction_dist]
+      naming_convention: "agri_surprise_{crop_id}.log"
+
+# 4. Validation Constraints
+validation_constraints:
+  - yield_quantity_must_be_positive: true
+  - intervention_timestamp_must_be_iso8601: true
+  - report_must_reference_active_schema_hash: true
+
+# 5. Drift Detection Metadata
+# Used by governance scripts to flag out-of-date artifacts.
+drift_rules:
+  auto_rehardening_trigger: schema_change
+  dependency_depth: 2
+  verification_requirement: manual_audit

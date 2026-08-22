@@ -1,0 +1,24 @@
+{
+  "schemas/agriculture/Agriculture_Sector_Schema.md": {
+    "sync_rules": ["contracts/schema_sync_rules/agriculture_sync.yaml"],
+    "models": ["models/baseline_models/baseline_model.py"],
+    "evidence": ["evidence/environmental_priors/", "evidence/prediction_error_logs/"],
+    "reports": ["reports/analytical_outputs/Report_Agriculture_Analysis.md"],
+    "interventions": ["interventions/applied_projects/"]
+  },
+  "schemas/education/Education_Sector_Schema.md": {
+    "sync_rules": ["contracts/schema_sync_rules/education_sync.yaml"],
+    "reports": ["reports/analytical_outputs/Report_Education_Analysis.md"]
+  },
+  "contracts/schema_sync_rules/governance_sync.yaml": {
+    "downstream_impact": [
+      "contracts/README.md",
+      "governance/audit_logs/",
+      "contracts/drift_detection/schema_hashes.json"
+    ]
+  },
+  "models/baseline_models/baseline_model.py": {
+    "implements": ["schemas/agriculture/Agriculture_Sector_Schema.md"],
+    "contract": "contracts/semantic_interfaces/model_contracts.py"
+  }
+}

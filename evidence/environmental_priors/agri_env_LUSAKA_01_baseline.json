@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "traceability_id": "PRIOR_AGRI_LUSAKA_2026_V1",
+    "schema_version": "1.0.0",
+    "schema_ref": "schemas/agriculture/Agriculture_Sector_Schema.md",
+    "region": "Lusaka_Province_Zambia",
+    "creation_timestamp": "2026-05-09T08:00:00Z",
+    "validation_status": "verified"
+  },
+  "environmental_assumptions": {
+    "climate_zone": "Tropical_Savannah",
+    "active_season": "Early_Dry",
+    "rainfall_expectations": {
+      "monthly_mean_mm": 12.0,
+      "probability_of_precipitation": 0.05
+    },
+    "temperature_range": {
+      "min_c": 14.5,
+      "max_c": 28.2
+    }
+  },
+  "soil_priors": {
+    "zone_id": "ZONE_LUSAKA_01",
+    "soil_type": "Ferric_Acrisol",
+    "baseline_beliefs": {
+      "moisture_content_m3_m3": 0.45,
+      "nitrogen_g_kg": 15.2,
+      "ph_level": 6.4,
+      "drainage_coefficient": 0.15
+    },
+    "uncertainty_sigma": 0.08
+  },
+  "crop_priors": {
+    "crop_id": "MAIZE_HYBRID_X_09",
+    "plant_type": "Maize",
+    "genetic_potential_yield_t_ha": 8.5,
+    "growth_stage_expected": "VEGETATIVE_V4",
+    "daily_water_requirement_liters": 2.5
+  },
+  "intervention_assumptions": {
+    "irrigation_efficiency_prior": 0.92,
+    "fertilizer_response_index": 1.4
+  },
+  "observation_windows": {
+    "telemetry_frequency": "hourly",
+    "field_audit_frequency": "weekly"
+  }
+}
