@@ -8,8 +8,7 @@
   },
   "schemas/education/Education_Sector_Schema.md": {
     "sync_rules": ["contracts/schema_sync_rules/education_sync.yaml"],
-    "reports": ["reports/analytical_outputs/Report_Education_Analysis.md"],
-    "interventions": ["interventions/ictaz/"]
+    "reports": ["reports/analytical_outputs/Report_Education_Analysis.md"]
   },
   "contracts/schema_sync_rules/governance_sync.yaml": {
     "downstream_impact": [

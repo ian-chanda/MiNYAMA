@@ -19,4 +19,4 @@ Our baseline assumptions for consumer resources include:
 ## 4. Relationship to Active Inference
 Consumer Resource priors provide the "Normal Heartbeat" of the city. Any deviation in `Measure_Flow` recorded in `observations/` generates a Prediction Error that forces the system to either:
 1.  **Adjust Beliefs**: Accept that the resource is scarcer than previously thought.
-2.  **Trigger Intervention**: Activate Phase 4 projects (e.g., ZUDS infrastructure updates) to restore the flow.
+2.  **Trigger Intervention**: Activate Phase 4 projects (e.g., infrastructure updates) to restore the flow.

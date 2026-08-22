@@ -4,15 +4,7 @@ This directory tracks the **Active Intent** of the system. It documents the inte
 
 ## 🔴 Active Theaters
 
-### 1. [ICTAZ](ictaz/)
-Information and Communications Technology Association of Zambia student chapter activities.
-*   *Focus:* Bridging academic theory with industry practice via the "Sector Spotlight Series."
-
-### 2. [ZUDS](zuds/)
-Zambia Urban Digital Systems.
-*   *Focus:* Infrastructure-level digital transformation projects.
-
-### 3. [Applied Projects](applied_projects/)
+### 1. [Applied Projects](applied_projects/)
 General field operations and pilot programs.
 
 ## 🛠 The Learning Loop

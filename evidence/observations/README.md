@@ -8,7 +8,7 @@ All observations must be machine-readable to support automated "Surprise Calcula
 
 ### Ingestion Standards
 *   **IoT Telemetry**: Structured JSON streams from sensors (Soil, Energy, Logistics).
-*   **Field Reports**: Standardized Markdown or CSV files from human agents (ICTAZ project leads, farmers).
+*   **Field Reports**: Standardized Markdown or CSV files from human agents (project leads, farmers).
 *   **External APIs**: Cached responses from third-party services (Weather, Market Prices).
 
 ### Provenance Requirements
