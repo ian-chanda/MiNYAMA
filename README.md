@@ -32,7 +32,7 @@ Explore the repository in the following sequence to align your mental model with
 
 ### 🔴 [Phase 4: The Action Layer](interventions/)
 **Closing the Loop.** Documenting active changes and projects performed by the system or its agents.
-*   **What you'll find:** Documented interventions (ICTAZ, ZUDS) and applied projects.
+*   **What you'll find:** Documented interventions and applied projects.
 *   **Analogy:** The physical actions taken to influence the world model.
 
 ### 🔵 [Phase 5: The Analytical Output](reports/)

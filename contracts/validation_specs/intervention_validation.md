@@ -38,13 +38,6 @@ An intervention is considered **Valid** only if it contributes to the "Source-Sy
 
 ## 3. Operational Examples
 
-### Event-Based: ICTAZ Sector Spotlight
-*   **Baseline**: Expect 50 students to attend and gain "Introductory" mastery of Finance.
-*   **Action**: Conduct a workshop with industry experts.
-*   **Outcome**: 75 attended; Assessment showed "Practicing" mastery.
-*   **Surprise**: Attendance +50% (Under-predicted reach); Mastery +1 level (Under-predicted efficacy).
-*   **Model Update**: Increase the "Efficacy Weight" of ICTAZ events in the Education Schema.
-
 ### Technical: Irrigation Pulse (Agri)
 *   **Baseline**: Belief that 20L of water will increase moisture level by 5%.
 *   **Action**: Activate irrigation pump for 30 minutes.
