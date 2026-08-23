@@ -39,24 +39,14 @@ A full copy of the **mapcn** React map component library (Next.js 16, React 19, 
 > Baseline for future reviews. Compare new reviews against this state.
 
 ### Git
-- **Branch**: `Runtime` (created 2026-08-22 from `Version-2` @ `9f71254`; local only, no upstream yet)
-- **Commits**: 3 total — `9f71254` "Restructured repository for Version 2" (HEAD), `f187ecd` "Add README.md", `93725b5` "Initial commit"
+- **Branch**: `Runtime` (created 2026-08-22 from `Version-2` @ `9f71254`; tracks `origin/Runtime`). Local `Version-2`/`master` branches pruned 2026-08-22 — they exist on `origin` only.
+- **Commits**: 4 total — `19ae42b` "Generalize intervention docs and add repository state snapshot" (HEAD), `9f71254` "Restructured repository for Version 2", `f187ecd` "Add README.md", `93725b5` "Initial commit"
+- **PR**: [#1](https://github.com/Zero0ptions/MiNYAMA/pull/1) open, `Runtime` → `Version-2` (review of the de-branding pass + this snapshot)
 
 ### Uncommitted working-tree changes (in progress)
-A **de-branding / generalization pass** removing the specific project names **ICTAZ** and **ZUDS**:
-- `README.md`, `interventions/README.md`: removed ICTAZ/ZUDS theater sections; interventions reduced to generic `applied_projects/`
-- `contracts/validation_specs/intervention_validation.md`: ICTAZ workshop example deleted (Irrigation example kept)
-- `contracts/drift_detection/dependency_map.json`: `interventions/ictaz/` mapping removed from education schema
-- `evidence/observations/README.md` + `evidence/environmental_priors/.../Consumer_Resources/README.md`: name references scrubbed
-- Deleted empty placeholders: `environmental_priors.md`, `schemas.md` (root)
-- `schemas/intervention_models/README.md`: 84 → 88 bytes (minor edit)
-- `audit_logs/README.md`, `verification_frameworks/README.md`, `reports/README.md`: modified (recent edits, 2026-07/08)
-- `.obsidian/workspace.json`: Obsidian session churn
-
-### Untracked
-- `mapcn/` — entire vendored Next.js app (added ~2026-05-12, never committed; has own `.gitignore`)
-- `analytical_outputs.md` — **0-byte empty file at root** (created today; likely accidental duplicate of `reports/analytical_outputs/`)
-- `.obsidian/graph.json`
+The de-branding / generalization pass removing **ICTAZ**/**ZUDS** was committed in `19ae42b`. Remaining uncommitted items are intentionally excluded noise:
+- `.obsidian/workspace.json` session churn
+- Untracked: `mapcn/` (vendored app), `analytical_outputs.md` (0-byte accidental), `.obsidian/graph.json`
 
 ### Known inconsistencies / drift to watch in reviews
 1. `governance/README.md` references `governance/audit_logs/` and `governance/verification_frameworks/` — both actually live at **repo root**.
