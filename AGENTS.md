@@ -39,14 +39,16 @@ A full copy of the **mapcn** React map component library (Next.js 16, React 19, 
 > Baseline for future reviews. Compare new reviews against this state.
 
 ### Git
-- **Branch**: `Runtime` (created 2026-08-22 from `Version-2` @ `9f71254`; tracks `origin/Runtime`). Local `Version-2`/`master` branches pruned 2026-08-22 — they exist on `origin` only.
-- **Commits**: 4 total — `19ae42b` "Generalize intervention docs and add repository state snapshot" (HEAD), `9f71254` "Restructured repository for Version 2", `f187ecd` "Add README.md", `93725b5` "Initial commit"
-- **PR**: [#1](https://github.com/Zero0ptions/MiNYAMA/pull/1) open, `Runtime` → `Version-2` (review of the de-branding pass + this snapshot)
+- **Branch**: `Runtime` (created 2026-08-22 from `Version-2` @ `9f71254`; tracks `origin/Runtime`) @ `bf5c2ae`. Local `Version-2`/`master` branches pruned 2026-08-22 — they exist on `origin` only.
+- **Commits**: 6 total — `bf5c2ae` "Add Obsidian oversight guides and update repository snapshot" (HEAD), `8ab9d79` "Fix encoding corruption in schemas/intervention_models/README.md", `19ae42b` "Generalize intervention docs…", `9f71254`, `f187ecd`, `93725b5`
+- **PRs** (all merged): [#1](https://github.com/Zero0ptions/MiNYAMA/pull/1) `Runtime`→`Version-2`; [#2](https://github.com/Zero0ptions/MiNYAMA/pull/2) `Version-2`→`master`; [#3](https://github.com/Zero0ptions/MiNYAMA/pull/3) `Docs/Oversight-Guides`→`Runtime` (merged via history rewrite after a host-path sanitization — see `audit_logs/2026-08-24_host-path-sanitization.md`)
+- **Remote extras**: `origin/emmd` @ `f187ecd` (stale, purpose unknown); `docs/` guides + first audit-log entry landed via PR #3
 
 ### Uncommitted working-tree changes (in progress)
-The de-branding / generalization pass removing **ICTAZ**/**ZUDS** was committed in `19ae42b`. Remaining uncommitted items are intentionally excluded noise:
-- `.obsidian/workspace.json` session churn
-- Untracked: `mapcn/` (vendored app), `analytical_outputs.md` (0-byte accidental), `.obsidian/graph.json`
+Remaining local items are intentionally uncommitted:
+- `reports/analytical_outputs/Report_Finance_Analysis.md` — user edit made outside this session, pending owner decision
+- `.obsidian/workspace.json` session churn; `.obsidian/plugins/`, `community-plugins.json`, `graph.json` (Obsidian config, untracked)
+- Untracked: `mapcn/` (vendored app), `analytical_outputs.md` (0-byte accidental)
 
 ### Known inconsistencies / drift to watch in reviews
 1. `governance/README.md` references `governance/audit_logs/` and `governance/verification_frameworks/` — both actually live at **repo root**.
