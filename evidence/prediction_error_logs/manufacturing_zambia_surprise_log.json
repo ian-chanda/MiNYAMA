@@ -1,0 +1,133 @@
+{
+  "surprise_log_id": "SURPRISE-ZMB-MFG-20260827",
+  "timestamp": "2026-08-27T11:30:00Z",
+  "schema_ref": "schemas/manufacturing/Manufacturing_Sector_Schema.md",
+  "prior_ref": "evidence/environmental_priors/manufacturing_zambia_population.json",
+  "observation_ref": "evidence/observations/manufacturing_zambia_observations.json",
+  "confidence_level": 0.88,
+  "governance_status": "pending_review",
+  "surprises": [
+    {
+      "inference_metadata": {
+        "log_id": "SURPRISE-ZMB-MFG-001",
+        "timestamp": "2026-08-27T11:20:00Z"
+      },
+      "context": {
+        "region": "Lusaka_Industrial_Zone",
+        "entity": "WO-ZMB-2026-001",
+        "entity_type": "WorkOrder",
+        "metric": "actual_duration"
+      },
+      "inference_data": {
+        "expected_value": "PT3H",
+        "observed_value": "PT3H20M",
+        "expected_seconds": 10800,
+        "observed_seconds": 12000,
+        "raw_delta_seconds": 1200,
+        "normalized_surprise_score": 0.111,
+        "p_value": 0.018
+      },
+      "analytical_insight": {
+        "explanation": "Actual production duration exceeded the prior belief by 11.1% due to load-shedding interruption and conveyor belt slowdown from dust ingress.",
+        "severity": "MEDIUM",
+        "intervention_recommendation": "Phase 2: Schedule production during stable grid windows; increase conveyor cleaning frequency.",
+        "sync_update_target": "schemas/manufacturing/WorkOrder.expected_duration"
+      },
+      "audit_trail": {
+        "calculated_by": "inference_engine/surprise_calculator.py",
+        "input_integrity_hash": "zmbmfg001a1b2c3",
+        "traceability_id": "trace-SURPRISE-ZMB-MFG-001-20260827"
+      }
+    },
+    {
+      "inference_metadata": {
+        "log_id": "SURPRISE-ZMB-MFG-002",
+        "timestamp": "2026-08-27T07:00:00Z"
+      },
+      "context": {
+        "region": "Eastern_Province_Chipata",
+        "entity": "SCL-EASTERN-TOMATO-001",
+        "entity_type": "SupplyChainLink",
+        "metric": "delivery_lead_time"
+      },
+      "inference_data": {
+        "expected_value": 2.0,
+        "observed_value": 2.5,
+        "raw_delta": 0.5,
+        "normalized_surprise_score": 1.0,
+        "p_value": 0.045
+      },
+      "analytical_insight": {
+        "explanation": "Supplier delivery took 2.5 days versus prior mean of 2.0 days, reflecting rainy-season road delays on the Chipata-Lusaka route.",
+        "severity": "LOW",
+        "intervention_recommendation": "Phase 1: Buffer raw tomato inventory by 0.5 days during rainy season; evaluate alternative route via Great East Road.",
+        "sync_update_target": "schemas/manufacturing/SupplyChainLink.lead_time_model"
+      },
+      "audit_trail": {
+        "calculated_by": "inference_engine/surprise_calculator.py",
+        "input_integrity_hash": "zmbmfg002d4e5f6",
+        "traceability_id": "trace-SURPRISE-ZMB-MFG-002-20260827"
+      }
+    },
+    {
+      "inference_metadata": {
+        "log_id": "SURPRISE-ZMB-MFG-003",
+        "timestamp": "2026-08-27T10:45:00Z"
+      },
+      "context": {
+        "region": "Lusaka_Industrial_Zone",
+        "entity": "PROC-TOMATO-PASTE-001",
+        "entity_type": "Process",
+        "metric": "brix_measurement"
+      },
+      "inference_data": {
+        "expected_value": 28.0,
+        "observed_value": 26.5,
+        "raw_delta": -1.5,
+        "normalized_surprise_score": 0.75,
+        "p_value": 0.032
+      },
+      "analytical_insight": {
+        "explanation": "Final paste brix measured 26.5 versus process threshold of 28.0, indicating tomatoes were harvested earlier than optimal due to supplier delivery uncertainty.",
+        "severity": "MEDIUM",
+        "intervention_recommendation": "Phase 2: Extend concentration step by 10 minutes; negotiate supplier ripeness standard.",
+        "sync_update_target": "schemas/manufacturing/Process.quality_checkpoints.brix_measurement.threshold"
+      },
+      "audit_trail": {
+        "calculated_by": "inference_engine/surprise_calculator.py",
+        "input_integrity_hash": "zmbmfg003g7h8i9",
+        "traceability_id": "trace-SURPRISE-ZMB-MFG-003-20260827"
+      }
+    },
+    {
+      "inference_metadata": {
+        "log_id": "SURPRISE-ZMB-MFG-004",
+        "timestamp": "2026-08-27T10:00:00Z"
+      },
+      "context": {
+        "region": "Lusaka_Industrial_Zone",
+        "entity": "PA-CNC-001",
+        "entity_type": "PhysicalAsset",
+        "metric": "vibration_ms2"
+      },
+      "inference_data": {
+        "expected_value": 0.06,
+        "observed_value": 0.10,
+        "raw_delta": 0.04,
+        "normalized_surprise_score": 0.67,
+        "p_value": 0.028
+      },
+      "analytical_insight": {
+        "explanation": "CNC vibration elevated to 0.10 m/s2 versus expected 0.06 m/s2, consistent with dust ingress and uneven factory flooring observed in Zambian metal-fabrication workshops.",
+        "severity": "MEDIUM",
+        "intervention_recommendation": "Phase 2: Schedule maintenance cleaning of CNC spindle housing; assess floor leveling near PA-CNC-001.",
+        "sync_update_target": "schemas/manufacturing/PhysicalAsset.maintenance_model"
+      },
+      "audit_trail": {
+        "calculated_by": "inference_engine/surprise_calculator.py",
+        "input_integrity_hash": "zmbmfg004j0k1l2",
+        "traceability_id": "trace-SURPRISE-ZMB-MFG-004-20260827"
+      }
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "PhysicalAsset": [
+    {
+      "asset_id": "PA-CONV-001",
+      "asset_type": "CONVEYOR_BELT",
+      "operational_state": "RUNNING",
+      "maintenance_model": "PREDICTIVE_VIBRATION_MODEL_7D",
+      "throughput_capacity": 750.0,
+      "telemetry_feed": {
+        "sensor_id": "PA-CONV-001-TELEMETRY",
+        "readings": [
+          {"timestamp": "2026-08-27T08:00:00Z", "temperature_c": 38.5, "vibration_ms2": 0.04, "error_codes": []},
+          {"timestamp": "2026-08-27T09:00:00Z", "temperature_c": 41.2, "vibration_ms2": 0.06, "error_codes": ["WARN_DUST_INGRESSION"]}
+        ]
+      },
+      "traceability_id": "trace-PA-CONV-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T09:00:00Z"
+    },
+    {
+      "asset_id": "PA-CNC-001",
+      "asset_type": "CNC_MACHINE",
+      "operational_state": "RUNNING",
+      "maintenance_model": "PREDICTIVE_TOOL_WEAR_MODEL_14D",
+      "throughput_capacity": 10.0,
+      "telemetry_feed": {
+        "sensor_id": "PA-CNC-001-TELEMETRY",
+        "readings": [
+          {"timestamp": "2026-08-27T08:00:00Z", "temperature_c": 42.0, "vibration_ms2": 0.08, "error_codes": ["WARN_VOLTAGE_FLUCTUATION"]},
+          {"timestamp": "2026-08-27T09:00:00Z", "temperature_c": 44.5, "vibration_ms2": 0.10, "error_codes": ["WARN_DUST_INGRESSION", "WARN_VOLTAGE_FLUCTUATION"]}
+        ]
+      },
+      "traceability_id": "trace-PA-CNC-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T09:00:00Z"
+    }
+  ],
+  "Material": [
+    {
+      "material_id": "MAT-RAW-TOMATO-001",
+      "material_type": "RAW",
+      "specifications": {
+        "variety": "Roma",
+        "origin": "Eastern Province, Zambia",
+        "grade": "Grade A",
+        "moisture_percent": 94.5
+      },
+      "quantity": 2500.0,
+      "location": "WAREHOUSE_CHIPATA",
+      "quality_status": "PASSED",
+      "traceability_id": "trace-MAT-RAW-TOMATO-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T08:00:00Z"
+    },
+    {
+      "material_id": "MAT-FG-TOMATO-PASTE-001",
+      "material_type": "FINISHED_GOOD",
+      "specifications": {
+        "product_name": "ZamTomato Paste 400g",
+        "package_type": "400g can",
+        "shelf_life_months": 24,
+        "zda_sub_sector": "Agro-processing"
+      },
+      "quantity": 1000.0,
+      "location": "FINISHED_GOODS_LUSAKA",
+      "quality_status": "PASSED",
+      "traceability_id": "trace-MAT-FG-TOMATO-PASTE-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T08:00:00Z"
+    }
+  ],
+  "WorkOrder": [
+    {
+      "order_id": "WO-ZMB-2026-001",
+      "product_to_produce": "MAT-FG-TOMATO-PASTE-001",
+      "quantity_required": 1000,
+      "input_materials": ["MAT-RAW-TOMATO-001"],
+      "assigned_assets": ["PA-CONV-001"],
+      "status": "COMPLETED",
+      "expected_duration": "PT3H",
+      "actual_duration": "PT3H20M",
+      "traceability_id": "trace-WO-ZMB-2026-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T11:20:00Z"
+    }
+  ],
+  "Process": [
+    {
+      "process_id": "PROC-TOMATO-PASTE-001",
+      "process_name": "Produce ZamTomato Paste 400g",
+      "steps": [
+        {"step": 1, "operation": "wash_and_sort", "asset_type": "CONVEYOR_BELT", "material": "MAT-RAW-TOMATO-001", "duration": "PT45M"},
+        {"step": 2, "operation": "crush_and_pulp", "asset_type": "CONVEYOR_BELT", "material": "MAT-RAW-TOMATO-001", "duration": "PT1H"},
+        {"step": 3, "operation": "heat_and_concentrate", "asset_type": "CONVEYOR_BELT", "material": "MAT-RAW-TOMATO-001", "duration": "PT1H15M"},
+        {"step": 4, "operation": "can_and_seal", "asset_type": "CONVEYOR_BELT", "material": "MAT-FG-TOMATO-PASTE-001", "duration": "PT1H"}
+      ],
+      "quality_checkpoints": [
+        {"step": 1, "check": "foreign_matter_inspection", "threshold": 0.0},
+        {"step": 3, "check": "brix_measurement", "threshold": 28.0},
+        {"step": 4, "check": "seal_integrity", "threshold": 100.0}
+      ],
+      "traceability_id": "trace-PROC-TOMATO-PASTE-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T08:00:00Z"
+    }
+  ],
+  "SupplyChainLink": [
+    {
+      "link_id": "SCL-EASTERN-TOMATO-001",
+      "supplier_id": "SUP-EASTERN-TOMATO-001",
+      "supplied_material": "MAT-RAW-TOMATO-001",
+      "lead_time_model": {
+        "distribution": "Normal",
+        "parameters": {"mean": "2d", "std": "0.5d"}
+      },
+      "reliability_score": 0.92,
+      "cost_per_unit": 3.50,
+      "traceability_id": "trace-SCL-EASTERN-TOMATO-001-20260827",
+      "created_at": "2026-08-27T08:00:00Z",
+      "updated_at": "2026-08-27T08:00:00Z"
+    }
+  ]
+}

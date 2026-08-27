@@ -39,23 +39,36 @@ A full copy of the **mapcn** React map component library (Next.js 16, React 19, 
 > Baseline for future reviews. Compare new reviews against this state.
 
 ### Git
-- **Branch**: `Runtime` (created 2026-08-22 from `Version-2` @ `9f71254`; tracks `origin/Runtime`). Local `Version-2`/`master` branches pruned 2026-08-22 — they exist on `origin` only.
-- **Commits**: 4 total — `19ae42b` "Generalize intervention docs and add repository state snapshot" (HEAD), `9f71254` "Restructured repository for Version 2", `f187ecd` "Add README.md", `93725b5` "Initial commit"
-- **PR**: [#1](https://github.com/Zero0ptions/MiNYAMA/pull/1) open, `Runtime` → `Version-2` (review of the de-branding pass + this snapshot)
+- **Branch**: `Data/Zambia-Manufacturing` (created 2026-08-27 from `Runtime` @ `bf5c2ae`; tracks `origin/Data/Zambia-Manufacturing` after push). Local `Runtime` branch remains at `bf5c2ae`.
+- **Commits**: 7 total on `Runtime` ancestry — `bf5c2ae` "Add Obsidian oversight guides and update repository snapshot" (HEAD of `Runtime`), `19ae42b` "Generalize intervention docs and add repository state snapshot", `9f71254` "Restructured repository for Version 2", `f187ecd` "Add README.md", `93725b5` "Initial commit`"
+- **PR**: [#1](https://github.com/Zero0ptions/MiNYAMA/pull/1) open, `Runtime` → `Version-2` (review of the de-branding pass + prior snapshot)
+
+### Recent material changes (2026-08-27)
+- Added schema-aligned Zambia manufacturing synthetic population:
+  - `evidence/environmental_priors/manufacturing_zambia_population.{json,csv}`
+  - `evidence/observations/manufacturing_zambia_observations.{json,csv}`
+  - `evidence/prediction_error_logs/manufacturing_zambia_surprise_log.{json,csv}`
+- Added manufacturing schema companions:
+  - `schemas/manufacturing/Manufacturing_Sector_Schema_Population.csv`
+  - `schemas/manufacturing/Manufacturing_Sector_Schema_Population_Template.md`
+  - `schemas/manufacturing/Manufacturing_Population_Data_Requirements.md`
+- Added governance / hardening artifacts:
+  - `audit_logs/2026-08-27_zambia_manufacturing_population.md`
+  - `reports/model_updates/manufacturing_zambia_model_update.md`
+- Implemented `models/prediction_engines/surprise_calculator.py` (was a 0-byte stub); now computes prediction error between priors and observations for the Manufacturing sector.
 
 ### Uncommitted working-tree changes (in progress)
-The de-branding / generalization pass removing **ICTAZ**/**ZUDS** was committed in `19ae42b`. Remaining uncommitted items are intentionally excluded noise:
 - `.obsidian/workspace.json` session churn
-- Untracked: `mapcn/` (vendored app), `analytical_outputs.md` (0-byte accidental), `.obsidian/graph.json`
+- Untracked: `mapcn/` (vendored app), `analytical_outputs.md` (0-byte accidental), `.obsidian/graph.json`, `.obsidian/community-plugins.json`, `.obsidian/plugins/`, `docs/external-data-ingestion-design.md`, `governance/organizational_context/`, `models/extraction_flows/document_archive.py`
 
 ### Known inconsistencies / drift to watch in reviews
 1. `governance/README.md` references `governance/audit_logs/` and `governance/verification_frameworks/` — both actually live at **repo root**.
 2. `operational_guides/` is **duplicated**: root copy and `governance/operational_guides/` — the two `SYSTEM_DOCS.md` files differ in content (2848 vs 2359 bytes).
 3. `interventions/README.md` links to `applied_projects/` — directory does not exist yet.
-4. `models/` is effectively empty: only `world_model.py` has code, and its imports (`Minyama_Active_Inference_Model.src.*`) don't match the repo layout — not runnable as-is.
-5. `reports/model_updates/` and `reports/surprise_analysis/` are empty; `reports/README.md` describes 3 hardening levels while `contracts/validation_specs/report_hardening_levels.md` defines 5.
+4. `models/` is partially populated: `surprise_calculator.py` is now functional, but `world_model.py` still imports a non-existent `Minyama_Active_Inference_Model` package and is not runnable as-is.
+5. `reports/surprise_analysis/` is empty; `reports/README.md` describes 3 hardening levels while `contracts/validation_specs/report_hardening_levels.md` defines 5.
 6. Root `README.md` footer says "Last Updated: May 9, 2026" but the file was edited 2026-08-20.
 7. `mapcn/node_modules` exists inside the vault — heavy; relies on `mapcn/.gitignore` to stay untracked.
 
 ---
-*Snapshot recorded 2026-08-22. Update the snapshot section when the repo state materially changes.*
+*Snapshot recorded 2026-08-27. Update the snapshot section when the repo state materially changes.*

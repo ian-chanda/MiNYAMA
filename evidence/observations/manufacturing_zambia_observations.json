@@ -1,0 +1,88 @@
+{
+  "observation_set_id": "OBS-ZMB-MFG-20260827",
+  "schema_ref": "schemas/manufacturing/Manufacturing_Sector_Schema.md",
+  "prior_ref": "evidence/environmental_priors/manufacturing_zambia_population.json",
+  "timestamp": "2026-08-27T11:30:00Z",
+  "observations": [
+    {
+      "source_id": "PA-CONV-001-TELEMETRY",
+      "timestamp": "2026-08-27T10:00:00Z",
+      "metric": "vibration_ms2",
+      "value": 0.07,
+      "unit": "m/s2",
+      "uncertainty_weight": 0.92,
+      "traceability_id": "trace-OBS-PA-CONV-001-VIB-20260827",
+      "entity_ref": "PhysicalAsset.PA-CONV-001"
+    },
+    {
+      "source_id": "PA-CONV-001-TELEMETRY",
+      "timestamp": "2026-08-27T10:00:00Z",
+      "metric": "temperature_c",
+      "value": 43.0,
+      "unit": "celsius",
+      "uncertainty_weight": 0.95,
+      "traceability_id": "trace-OBS-PA-CONV-001-TEMP-20260827",
+      "entity_ref": "PhysicalAsset.PA-CONV-001"
+    },
+    {
+      "source_id": "PA-CNC-001-TELEMETRY",
+      "timestamp": "2026-08-27T10:00:00Z",
+      "metric": "vibration_ms2",
+      "value": 0.10,
+      "unit": "m/s2",
+      "uncertainty_weight": 0.90,
+      "traceability_id": "trace-OBS-PA-CNC-001-VIB-20260827",
+      "entity_ref": "PhysicalAsset.PA-CNC-001"
+    },
+    {
+      "source_id": "PA-CNC-001-TELEMETRY",
+      "timestamp": "2026-08-27T10:00:00Z",
+      "metric": "temperature_c",
+      "value": 44.5,
+      "unit": "celsius",
+      "uncertainty_weight": 0.95,
+      "traceability_id": "trace-OBS-PA-CNC-001-TEMP-20260827",
+      "entity_ref": "PhysicalAsset.PA-CNC-001"
+    },
+    {
+      "source_id": "MES_ZAMBIA_01",
+      "timestamp": "2026-08-27T11:20:00Z",
+      "metric": "actual_duration",
+      "value": "PT3H20M",
+      "unit": "ISO8601",
+      "uncertainty_weight": 1.0,
+      "traceability_id": "trace-OBS-WO-ZMB-2026-001-DURATION-20260827",
+      "entity_ref": "WorkOrder.WO-ZMB-2026-001"
+    },
+    {
+      "source_id": "SUP-EASTERN-TOMATO-001",
+      "timestamp": "2026-08-27T07:00:00Z",
+      "metric": "delivery_lead_time",
+      "value": 2.5,
+      "unit": "days",
+      "uncertainty_weight": 0.90,
+      "traceability_id": "trace-OBS-SCL-EASTERN-TOMATO-001-LEADTIME-20260827",
+      "entity_ref": "SupplyChainLink.SCL-EASTERN-TOMATO-001"
+    },
+    {
+      "source_id": "QC_LAB_LUSAKA",
+      "timestamp": "2026-08-27T10:45:00Z",
+      "metric": "brix_measurement",
+      "value": 26.5,
+      "unit": "degrees_brix",
+      "uncertainty_weight": 0.98,
+      "traceability_id": "trace-OBS-PROC-TOMATO-PASTE-001-BRIX-20260827",
+      "entity_ref": "Process.PROC-TOMATO-PASTE-001"
+    },
+    {
+      "source_id": "QC_LAB_LUSAKA",
+      "timestamp": "2026-08-27T11:00:00Z",
+      "metric": "seal_integrity",
+      "value": 100.0,
+      "unit": "percent",
+      "uncertainty_weight": 0.99,
+      "traceability_id": "trace-OBS-PROC-TOMATO-PASTE-001-SEAL-20260827",
+      "entity_ref": "Process.PROC-TOMATO-PASTE-001"
+    }
+  ]
+}

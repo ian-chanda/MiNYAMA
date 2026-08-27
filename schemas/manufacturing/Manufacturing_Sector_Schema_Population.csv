@@ -1,0 +1,31 @@
+entity,attribute,data_type,description,example_value,constraints
+PhysicalAsset,asset_id,String,A unique identifier for the machine or equipment,PA-CNC-001,Required; unique
+PhysicalAsset,asset_type,Enum,Type of capital equipment,CNC_MACHINE,"Enum: CNC_MACHINE, ROBOTIC_ARM, CONVEYOR_BELT, INSPECTION_CAMERA"
+PhysicalAsset,operational_state,Enum,The system's belief about the current state,RUNNING,"Enum: RUNNING, IDLE, MAINTENANCE, FAILED"
+PhysicalAsset,maintenance_model,Model,The system's belief predicting when the next maintenance will be needed,PREDICTIVE_VIBRATION_MODEL_7D,Reference to a maintenance predictive model
+PhysicalAsset,throughput_capacity,Float,The expected production rate (e.g. units per hour),120.5,Units per hour
+PhysicalAsset,telemetry_feed,TimeSeries,Real-time sensor data (temperature vibration error codes),"{temperature_c: 65.2, vibration_ms2: 0.03, error_codes: []}",ISO 8601 timestamped readings
+Material,material_id,String,A unique batch SKU or serial number,MAT-RAW-ALU-001,Required; unique
+Material,material_type,Enum,Stage of production the material is in,RAW,"Enum: RAW, WORK_IN_PROGRESS, FINISHED_GOOD"
+Material,specifications,Object,The required physical or chemical properties of the material,"{grade: 'A6061-T6', dimensions_cm: {length: 100, width: 50, thickness: 2}}",Schema-defined object
+Material,quantity,Float / Int,The amount of the material (e.g. in units kg liters),500.0,Positive number with unit implied by context
+Material,location,String,The system's belief about its current physical location,WAREHOUSE_A,Free text location identifier
+Material,quality_status,Enum,The system's belief about its quality,PASSED,"Enum: PASSED, FAILED, UNTESTED"
+WorkOrder,order_id,String,A unique identifier for the production job,WO-2026-001,Required; unique
+WorkOrder,product_to_produce,Material_Ref,A reference to the Material definition of the final product,MAT-FG-GEARBOX-001,Foreign key to Material.material_id
+WorkOrder,quantity_required,Int,The target number of units to produce,100,Positive integer
+WorkOrder,input_materials,Array<Material_Ref>,A list of the raw Materials required for the order,"[MAT-RAW-ALU-001, MAT-RAW-STEEL-001]",Array of Material.material_id references
+WorkOrder,assigned_assets,Array<Asset_Ref>,The PhysicalAsset(s) tasked with completing the order,"[PA-CNC-001, PA-ROBOT-002]",Array of PhysicalAsset.asset_id references
+WorkOrder,status,Enum,Current state of the work order,IN_PROGRESS,"Enum: PENDING, IN_PROGRESS, COMPLETED, FAILED"
+WorkOrder,expected_duration,Duration,The system's prediction of how long the order will take,PT4H,ISO 8601 duration format
+WorkOrder,actual_duration,Duration,The measured time taken used for model refinement,PT4H15M,ISO 8601 duration format
+Process,process_id,String,Unique ID for the manufacturing process,PROC-GEARBOX-ASSEMBLY-001,Required; unique
+Process,process_name,String,Human-readable name,Assemble Main Gearbox,Free text
+Process,steps,Array<Object>,An ordered list of operations linking asset types materials and durations,"[{step: 1, operation: cut_shaft, asset_type: CNC_MACHINE, material: MAT-RAW-STEEL-001, duration: PT1H}, {step: 2, operation: assemble_gear, asset_type: ROBOTIC_ARM, duration: PT2H}]",Ordered sequence
+Process,quality_checkpoints,Array<Object>,Defined points within the steps where quality is to be assessed,"[{step: 1, check: dimensional_tolerance, threshold: 0.01}, {step: 2, check: torque_validation, threshold: 45}]",Linked to Process.steps indices
+SupplyChainLink,link_id,String,A unique ID for the supplier relationship,SCL-ACME-ALU-001,Required; unique
+SupplyChainLink,supplier_id,String,An identifier for the external supplier (an unmodeled agent),SUP-ACME-METALS-001,External reference
+SupplyChainLink,supplied_material,Material_Ref,The Material that is being supplied,MAT-RAW-ALU-001,Foreign key to Material.material_id
+SupplyChainLink,lead_time_model,ProbabilityDist,The system's belief about the expected time from order to delivery,Normal(mean=5d std=1d),Distribution encoded as string or JSON
+SupplyChainLink,reliability_score,Float,The system's belief about the supplier's dependability,0.94,Value between 0.0 and 1.0
+SupplyChainLink,cost_per_unit,Float,The current price for the supplied material,12.5,Non-negative monetary value
