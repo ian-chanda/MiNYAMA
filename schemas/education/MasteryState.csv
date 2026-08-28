@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`mastery_id`,`String`,A unique ID for this instance of the learner's knowledge state.
+`learner_id`,`Learner_Ref`,The learner this state belongs to.
+`knowledge_map`,"`Map<Concept_Ref, Mastery_Level>`",A map where each concept is assigned a **belief** about its mastery level.
+`mastery_level`,`Enum`,"`NOT_SEEN`, `INTRODUCED`, `PRACTICING`, `MASTERED`."
+`confidence_model`,`Model`,The system's confidence in its own assessment of the learner's mastery.

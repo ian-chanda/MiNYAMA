@@ -1,0 +1,5 @@
+Attribute,Data Type,Description
+`concept_id`,`String`,A unique identifier for the unit of knowledge.
+`description`,`String`,A summary of the concept.
+`dependency_graph`,`Array<Concept_Ref>`,A list of prerequisite `KnowledgeConcept`s that must be mastered first.
+`associated_resources`,`Array<Resource_Ref>`,A list of `LearningResource`s that teach this concept.

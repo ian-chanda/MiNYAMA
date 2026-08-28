@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`market_id`,`String`,"Unique ID for the venue (e.g., `NASDAQ`, `NYSE`)."
+`market_type`,`Enum`,"`EXCHANGE`, `OTC_MARKET`, `DARK_POOL`."
+`trading_hours`,`TimeRange`,The times when trading is permitted.
+`rules_engine`,`Object`,"A representation of the market's rules (e.g., circuit breakers)."
+`order_book`,`Object`,"A snapshot of current buy and sell orders, representing supply/demand."

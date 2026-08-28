@@ -1,0 +1,23 @@
+# `Asset`
+
+*Parent schema: [Finance Sector Schema](Finance_Sector_Schema.md)*
+
+## Economic Definition
+
+Represents any instrument of value that can be owned and traded (e.g., stocks, bonds, currencies). Assets are the fundamental medium of the financial system.
+
+## System Role
+
+The system models the "true" value and price behavior of assets. The difference between the predicted and observed price is a core component of "surprise."
+
+## Table
+
+| Attribute          | Data Type           | Description                                                               |
+| ------------------ | ------------------- | ------------------------------------------------------------------------- |
+| `asset_id`         | `String`            | A unique identifier for the asset (e.g., CUSIP, ISIN).                    |
+| `asset_class`      | `Enum`              | e.g., `EQUITY`, `FIXED_INCOME`, `DERIVATIVE`, `CURRENCY`.                   |
+| `issuer_id`        | `Agent_Ref`         | The `agent_id` of the entity that created the asset.                      |
+| `valuation_model`  | `Function` / `Model`| The system's internal **belief** model for the asset's price.             |
+| `price_history`    | `TimeSeries`        | A time-series of past market prices.                                      |
+| `volatility_model` | `ProbabilityDist`   | The system's **belief** about the range and likelihood of price swings.   |
+| `liquidity_depth`  | `Float`             | A measure of market depth for the asset.                                  |

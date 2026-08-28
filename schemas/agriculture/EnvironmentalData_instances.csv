@@ -1,0 +1,8 @@
+data_id,timestamp,source,data_type,value,forecast_model
+ENV-2026-08-28-001,2026-08-28T06:00:00+02:00,WEATHER_STATION,TEMPERATURE,21.4,"{""model"":""NA"",""horizon"":null}"
+ENV-2026-08-28-002,2026-08-28T06:00:00+02:00,WEATHER_STATION,RAINFALL,0.0,"{""model"":""NA"",""horizon"":null}"
+ENV-2026-08-28-003,2026-08-28T06:00:00+02:00,WEATHER_FORECAST,RAINFALL,12.5,"{""model"":""GFS-7day"",""horizon_hours"":72,""probability_precip"":0.65}"
+ENV-2026-08-27-014,2026-08-27T12:00:00+02:00,SOIL_SENSOR,NDVI,0.68,"{""model"":""NA"",""horizon"":null}"
+ENV-2026-08-27-015,2026-08-27T12:00:00+02:00,SATELLITE_IMAGERY,NDVI,0.72,"{""model"":""Sentinel-2 composite"",""horizon"":null}"
+ENV-2026-08-28-004,2026-08-28T06:00:00+02:00,WEATHER_STATION,SOLAR_RADIATION,612.0,"{""model"":""NA"",""horizon"":""daily_mean_W/m2""}"
+ENV-2026-08-28-005,2026-08-28T06:00:00+02:00,WEATHER_STATION,WIND_SPEED,11.3,"{""model"":""NA"",""horizon"":null}"

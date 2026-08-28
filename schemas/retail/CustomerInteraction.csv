@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`interaction_id`,`String`,A unique identifier for the session or event.
+`customer_id`,`Customer_Ref`,The customer who initiated the interaction.
+`channel`,`Enum`,"`ONLINE`, `IN_STORE`, `MOBILE_APP`."
+`timestamp`,`DateTime`,The time the interaction occurred.
+`interaction_type`,`Enum`,"`PAGE_VIEW`, `ADD_TO_CART`, `SEARCH_QUERY`, `PROMO_CODE_APPLIED`."
+`outcome`,`Enum`,"`PURCHASE`, `CART_ABANDONMENT`, `BOUNCE`."

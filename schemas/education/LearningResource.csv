@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`resource_id`,`String`,A unique identifier for the learning asset.
+`resource_type`,`Enum`,"`VIDEO`, `TEXT`, `INTERACTIVE_SIMULATION`, `ASSESSMENT`."
+`associated_concept`,`Concept_Ref`,The primary `KnowledgeConcept` this resource is designed to teach.
+`difficulty_level`,`Float`,The system's **belief** about the difficulty of this resource.
+`efficacy_model`,`Model`,The system's **belief** about how effective this resource is at improving mastery.

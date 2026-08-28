@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`provider_id`,`String`,"A unique identifier for the provider (e.g., NPI)."
+`provider_type`,`Enum`,"`HOSPITAL`, `CLINIC`, `INDIVIDUAL_PRACTITIONER`."
+`specialization`,`Array<String>`,"List of medical specializations (e.g., `Cardiology`, `Oncology`)."
+`resource_capacity`,`Object`,"The system's **belief** about available beds, staff, equipment, etc."
+`treatment_efficacy_model`,`Model`,The system's **belief** about the effectiveness of this provider's care.

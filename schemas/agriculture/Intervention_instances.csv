@@ -1,0 +1,9 @@
+intervention_id,timestamp,intervention_type,target_zone_ref,applied_materials,equipment_used_ref
+INT-2026-001,2026-06-03T07:30:00+02:00,PLANTING,ZN-01,"{""material"":""SC-709 seed corn"",""quantity"":""11.5kg/ha"",""seed_rate"":""74000 seeds/ha""}",EQ-001
+INT-2026-002,2026-06-05T07:15:00+02:00,PLANTING,ZN-02,"{""material"":""SC-SR414 seed wheat"",""quantity"":""145kg/ha"",""seed_rate"":""180kg/ha""}",EQ-002
+INT-2026-003,2026-06-04T08:00:00+02:00,PLANTING,ZN-03,"{""material"":""SCS-200 soybean seed"",""quantity"":""70kg/ha""}",EQ-001
+INT-2026-010,2026-07-20T06:45:00+02:00,IRRIGATION,ZN-03,"{""material"":""water"",""quantity"":""25mm applied"", ""duration_min"":180}",EQ-004
+INT-2026-012,2026-07-28T08:20:00+02:00,FERTILIZATION,ZN-01,"{""material"":""Urea (46-0-0)"",""quantity"":""120kg/ha"",""method"":""broadcast""}",EQ-001
+INT-2026-013,2026-08-05T07:00:00+02:00,PESTICIDE_APPLICATION,ZN-03,"{""material"":""Lambda-cyhalothrin"",""quantity"":""0.4L/ha"",""target"":""fall armyworm""}",EQ-005
+INT-2026-014,2026-08-01T06:30:00+02:00,IRRIGATION,ZN-01,"{""material"":""water"",""quantity"":""20mm applied"",""duration_min"":150}",EQ-004
+INT-2026-020,2026-08-20T09:00:00+02:00,PESTICIDE_APPLICATION,ZN-02,"{""material"":""Propiconazole"",""quantity"":""0.5L/ha"",""target"":""leaf rust""}",EQ-005

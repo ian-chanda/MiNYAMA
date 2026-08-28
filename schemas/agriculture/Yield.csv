@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`yield_id`,`String`,A unique ID for this specific harvest event.
+`crop_ref`,`Crop_Ref`,The `Crop` that was harvested.
+`harvest_timestamp`,`DateTime`,The time of the harvest.
+`quantity_measured`,`Float`,"The total measured yield (e.g., in tonnes)."
+`quality_grade`,`String`,The assessed quality of the harvested crop.

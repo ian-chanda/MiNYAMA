@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`zone_id`,`String`,A unique identifier for the field or sub-field area.
+`location_polygon`,`GeoJSON`,The precise geospatial boundary of the zone.
+`size_hectares`,`Float`,The area of the zone.
+`soil_model`,`Model`,"The system's **belief** about soil composition (nutrients, organic matter, pH)."
+`moisture_model`,`Model`,The system's **belief** about the current soil moisture level.
+`current_crop_ref`,`Crop_Ref`,A reference to the `Crop` currently planted in this zone.

@@ -1,0 +1,9 @@
+Attribute,Data Type,Description
+`order_id`,`String`,A unique identifier for the production job.
+`product_to_produce`,`Material_Ref`,A reference to the `Material` definition of the final product.
+`quantity_required`,`Int`,The target number of units to produce.
+`input_materials`,`Array<Material_Ref>`,A list of the raw `Material`s required for the order.
+`assigned_assets`,`Array<Asset_Ref>`,The `PhysicalAsset`(s) tasked with completing the order.
+`status`,`Enum`,"`PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`."
+`expected_duration`,`Duration`,The system's **prediction** of how long the order will take.
+`actual_duration`,`Duration`,"The measured time taken, used for model refinement."

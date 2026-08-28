@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`customer_id`,`String`,"A unique, anonymized identifier for the customer."
+`demographics`,`Object`,"Age, location, and other data for segmentation."
+`purchase_history`,`Array<Txn_Ref>`,A list of past `Transaction` IDs.
+`loyalty_status`,`Enum`,"e.g., `NEW`, `ACTIVE`, `CHURN_RISK`."
+`propensity_to_buy_model`,`Model`,The system's **belief** about this customer's likelihood to purchase.

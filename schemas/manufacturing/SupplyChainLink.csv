@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`link_id`,`String`,A unique ID for the supplier relationship.
+`supplier_id`,`String`,An identifier for the external supplier (an unmodeled agent).
+`supplied_material`,`Material_Ref`,The `Material` that is being supplied.
+`lead_time_model`,`ProbabilityDist`,The system's **belief** about the expected time from order to delivery.
+`reliability_score`,`Float`,The system's **belief** about the supplier's dependability.
+`cost_per_unit`,`Float`,The current price for the supplied material.

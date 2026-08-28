@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`material_id`,`String`,"A unique batch, SKU, or serial number."
+`material_type`,`Enum`,"`RAW`, `WORK_IN_PROGRESS`, `FINISHED_GOOD`."
+`specifications`,`Object`,The required physical or chemical properties of the material.
+`quantity`,`Float` / `Int`,"The amount of the material (e.g., in units, kg, liters)."
+`location`,`String`,"The system's **belief** about its current physical location (e.g., `WAREHOUSE_A`)."
+`quality_status`,`Enum`,"The system's **belief** about its quality: `PASSED`, `FAILED`, `UNTESTED`."

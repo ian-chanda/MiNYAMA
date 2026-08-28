@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`agent_id`,`String`,"A unique identifier for the agent (e.g., LEI for a corporation)."
+`agent_type`,`Enum`,"e.g., `CENTRAL_BANK`, `COMMERCIAL_BANK`, `INVESTOR`, `REGULATOR`."
+`risk_profile`,`ProbabilityDist`,The system's **belief** about the agent's risk tolerance.
+`liquidity_preference`,`ProbabilityDist`,The system's **belief** about the agent's need for cash-equivalent assets.
+`capital_reserves`,`Float`,The believed amount of capital the agent holds.
+`known_holdings`,`Array<Asset_Ref>`,A list of `Asset` IDs this agent is known to possess.

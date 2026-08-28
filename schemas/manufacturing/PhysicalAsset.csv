@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`asset_id`,`String`,A unique identifier for the machine or equipment.
+`asset_type`,`Enum`,"`CNC_MACHINE`, `ROBOTIC_ARM`, `CONVEYOR_BELT`, `INSPECTION_CAMERA`."
+`operational_state`,`Enum`,"The system's **belief** about the current state: `RUNNING`, `IDLE`, `MAINTENANCE`, `FAILED`."
+`maintenance_model`,`Model`,The system's **belief** predicting when the next maintenance will be needed.
+`throughput_capacity`,`Float`,"The expected production rate (e.g., units per hour)."
+`telemetry_feed`,`TimeSeries`,"Real-time sensor data (temperature, vibration, error codes)."

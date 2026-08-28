@@ -1,0 +1,5 @@
+Attribute,Data Type,Description
+`process_id`,`String`,Unique ID for the manufacturing process.
+`process_name`,`String`,"Human-readable name (e.g., ""Assemble Main Gearbox"")."
+`steps`,`Array<Object>`,"An ordered list of operations, linking asset types, materials, and durations."
+`quality_checkpoints`,`Array<Object>`,Defined points within the `steps` where quality is to be assessed.

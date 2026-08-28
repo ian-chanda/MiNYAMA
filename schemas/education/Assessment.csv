@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`assessment_id`,`String`,A unique ID for this specific assessment instance.
+`learner_id`,`Learner_Ref`,The learner taking the assessment.
+`assessed_concepts`,`Array<Concept_Ref>`,A list of the `KnowledgeConcept`s being tested.
+`predicted_score_dist`,`ProbabilityDist`,The system's **prediction** of the learner's likely score.
+`actual_score`,`Float`,The final score the learner achieved.
+`inferred_mastery_update`,"`Map<Concept_Ref, Float>`",The calculated update to the `MasteryState` based on performance.

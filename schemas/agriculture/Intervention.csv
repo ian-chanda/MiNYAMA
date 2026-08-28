@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`intervention_id`,`String`,A unique identifier for the action taken.
+`timestamp`,`DateTime`,The time the action was performed.
+`intervention_type`,`Enum`,"`PLANTING`, `IRRIGATION`, `FERTILIZATION`, `PESTICIDE_APPLICATION`, `HARVEST`."
+`target_zone_ref`,`Zone_Ref`,The `Zone` where the intervention was applied.
+`applied_materials`,`Object`,"Details of materials used (e.g., `{material: 'Nitrogen', quantity: '20kg'}`)."
+`equipment_used_ref`,`Equipment_Ref`,The `Equipment` used to perform the action.

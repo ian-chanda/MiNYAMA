@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`intervention_id`,`String`,"Unique ID for the intervention (e.g., RxNorm for drugs)."
+`intervention_type`,`Enum`,"`MEDICATION`, `PHYSICAL_THERAPY`, `SURGICAL_PROCEDURE`, `DIAGNOSTIC`."
+`cost_model`,`Model`,A model of the financial cost of the intervention.
+`expected_efficacy_model`,`Model`,The system's **belief** about the intervention's effectiveness on a `HealthState`.
+`known_side_effects`,`Array<String>`,A list of potential adverse effects.

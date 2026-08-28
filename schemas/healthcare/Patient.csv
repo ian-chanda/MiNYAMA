@@ -1,0 +1,6 @@
+Attribute,Data Type,Description
+`patient_id`,`String`,"A unique, anonymized identifier for the patient."
+`demographics`,`Object`,"Age, sex, and other relevant demographic data for risk stratification."
+`health_state_ref`,`HealthState_Ref`,"A reference to the patient's current, evolving `HealthState`."
+`care_plan_adherence`,`ProbabilityDist`,The system's **belief** about the patient's likelihood to follow treatments.
+`insurance_provider_id`,`String`,"Identifier for the patient's insurer, linking to payment models."

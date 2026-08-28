@@ -1,0 +1,7 @@
+Attribute,Data Type,Description
+`data_id`,`String`,A unique ID for the data point or forecast.
+`timestamp`,`DateTime`,The time the data was recorded or is forecasted for.
+`source`,`Enum`,"`WEATHER_STATION`, `SATELLITE_IMAGERY`, `SOIL_SENSOR`, `WEATHER_FORECAST`."
+`data_type`,`Enum`,"`TEMPERATURE`, `RAINFALL`, `SOLAR_RADIATION`, `WIND_SPEED`, `NDVI`."
+`value`,`Float`,The measured or predicted value of the data type.
+`forecast_model`,`Model`,"If the source is a forecast, this holds the model of its future values."
