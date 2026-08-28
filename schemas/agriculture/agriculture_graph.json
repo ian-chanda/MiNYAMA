@@ -1,0 +1,461 @@
+{
+  "schema_ref": "agriculture/Agriculture_Sector_Schema.md",
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Machine-readable graph representation of the Agriculture sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; _Ref relations are typed, weighted edges.",
+  "meta": {
+    "representation": "graph",
+    "node_types": ["Zone", "Crop", "Equipment", "Intervention", "EnvironmentalData", "Yield"],
+    "edge_type_enum": ["planted_in", "occupies", "applied_to_zone", "used_equipment", "observes_zone", "observes_crop", "harvested_from", "alters", "targets", "records"],
+    "belief_attr_suffix": ["_model", "_dist", "_ref"],
+    "units_default": "si"
+  },
+  "nodes": [
+    {
+      "id": "ZN-01",
+      "type": "Zone",
+      "attributes": {
+        "location_polygon": {"type": "GeoJSON/Polygon", "value": {}},
+        "size_hectares": {"type": "Float", "value": 42.5, "unit": "ha"}
+      },
+      "beliefs": {
+        "soil": {
+          "type": "MultivariateNormal",
+          "params": {"means": {"N": 65, "P": 22, "K": 48, "organic_matter": 3.2, "ph": 6.4}},
+          "covariance_scale": 0.08,
+          "confidence": 0.87
+        },
+        "moisture": {
+          "type": "Normal",
+          "params": {"mean_volumetric_percent": 38.2, "std_dev": 4.1},
+          "confidence": 0.87,
+          "source": "capacitance_probe"
+        }
+      }
+    },
+    {
+      "id": "ZN-02",
+      "type": "Zone",
+      "attributes": {
+        "location_polygon": {"type": "GeoJSON/Polygon", "value": {}},
+        "size_hectares": {"type": "Float", "value": 58.0, "unit": "ha"}
+      },
+      "beliefs": {
+        "soil": {
+          "type": "MultivariateNormal",
+          "params": {"means": {"N": 48, "P": 18, "K": 60, "organic_matter": 2.8, "ph": 6.1}},
+          "covariance_scale": 0.1,
+          "confidence": 0.84
+        },
+        "moisture": {
+          "type": "Normal",
+          "params": {"mean_volumetric_percent": 31.5, "std_dev": 5.2},
+          "confidence": 0.84,
+          "source": "capacitance_probe"
+        }
+      }
+    },
+    {
+      "id": "ZN-03",
+      "type": "Zone",
+      "attributes": {
+        "location_polygon": {"type": "GeoJSON/Polygon", "value": {}},
+        "size_hectares": {"type": "Float", "value": 33.0, "unit": "ha"}
+      },
+      "beliefs": {
+        "soil": {
+          "type": "MultivariateNormal",
+          "params": {"means": {"N": 72, "P": 30, "K": 55, "organic_matter": 3.6, "ph": 6.7}},
+          "covariance_scale": 0.07,
+          "confidence": 0.90
+        },
+        "moisture": {
+          "type": "Normal",
+          "params": {"mean_volumetric_percent": 42.0, "std_dev": 3.6},
+          "confidence": 0.90,
+          "source": "capacitance_probe"
+        }
+      }
+    },
+    {
+      "id": "CRP-2026-ZN01-CORN",
+      "type": "Crop",
+      "attributes": {
+        "plant_type": {"type": "Enum", "value": "CORN"},
+        "genetics": {"type": "String", "value": "SC-709"},
+        "planted_at": {"type": "DateTime", "value": "2026-06-03T07:30:00+02:00"}
+      },
+      "beliefs": {
+        "growth_stage": {
+          "type": "Categorical",
+          "params": {"probs": {"GERMINATION": 0.0, "VEGETATIVE": 0.04, "FLOWERING": 0.9, "MATURITY": 0.06}},
+          "gdd_accumulated": 1420,
+          "days_since_planting": 86,
+          "confidence": 0.82
+        },
+        "health": {
+          "type": "Categorical",
+          "params": {"probs": {"HEALTHY": 0.79, "STRESSED": 0.15, "INFESTED": 0.05, "DISEASED": 0.01}},
+          "confidence": 0.79
+        },
+        "yield_prediction": {
+          "type": "Normal",
+          "params": {"mean_tonnes_per_ha": 8.6, "std_dev": 1.1},
+          "unit": "t/ha",
+          "confidence": 0.82
+        }
+      }
+    },
+    {
+      "id": "CRP-2026-ZN02-WHEAT",
+      "type": "Crop",
+      "attributes": {
+        "plant_type": {"type": "Enum", "value": "WHEAT"},
+        "genetics": {"type": "String", "value": "SC-SR414"},
+        "planted_at": {"type": "DateTime", "value": "2026-06-05T07:15:00+02:00"}
+      },
+      "beliefs": {
+        "growth_stage": {
+          "type": "Categorical",
+          "params": {"probs": {"GERMINATION": 0.0, "VEGETATIVE": 0.9, "FLOWERING": 0.08, "MATURITY": 0.02}},
+          "gdd_accumulated": 1240,
+          "days_since_planting": 74,
+          "confidence": 0.81
+        },
+        "health": {
+          "type": "Categorical",
+          "params": {"probs": {"HEALTHY": 0.74, "STRESSED": 0.2, "INFESTED": 0.05, "DISEASED": 0.01}},
+          "confidence": 0.74
+        },
+        "yield_prediction": {
+          "type": "Normal",
+          "params": {"mean_tonnes_per_ha": 6.2, "std_dev": 0.9},
+          "unit": "t/ha",
+          "confidence": 0.81
+        }
+      }
+    },
+    {
+      "id": "CRP-2026-ZN03-SOY",
+      "type": "Crop",
+      "attributes": {
+        "plant_type": {"type": "Enum", "value": "SOYBEANS"},
+        "genetics": {"type": "String", "value": "SCS-200"},
+        "planted_at": {"type": "DateTime", "value": "2026-06-04T08:00:00+02:00"}
+      },
+      "beliefs": {
+        "growth_stage": {
+          "type": "Categorical",
+          "params": {"probs": {"GERMINATION": 0.0, "VEGETATIVE": 0.05, "FLOWERING": 0.9, "MATURITY": 0.05}},
+          "gdd_accumulated": 1360,
+          "days_since_planting": 79,
+          "confidence": 0.85
+        },
+        "health": {
+          "type": "Categorical",
+          "params": {"probs": {"HEALTHY": 0.77, "STRESSED": 0.13, "INFESTED": 0.09, "DISEASED": 0.01}},
+          "confidence": 0.77
+        },
+        "yield_prediction": {
+          "type": "Normal",
+          "params": {"mean_tonnes_per_ha": 3.4, "std_dev": 0.4},
+          "unit": "t/ha",
+          "confidence": 0.85
+        }
+      }
+    },
+    {
+      "id": "EQ-001",
+      "type": "Equipment",
+      "attributes": {
+        "equipment_type": {"type": "Enum", "value": "TRACTOR"},
+        "location": {"type": "GeoPoint", "value": {"lat": -13.0401, "lon": 28.2920}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"ACTIVE": 0.9, "IDLE": 0.05, "MAINTENANCE": 0.03, "FAILED": 0.02}},
+          "confidence": 0.95
+        }
+      },
+      "telemetry": {
+        "fuel_level_percent": {"value": 62, "unit": "%", "updated": "2026-08-28T09:41:00Z"}
+      }
+    },
+    {
+      "id": "EQ-002",
+      "type": "Equipment",
+      "attributes": {
+        "equipment_type": {"type": "Enum", "value": "TRACTOR"},
+        "location": {"type": "GeoPoint", "value": {"lat": -13.0512, "lon": 28.3305}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"ACTIVE": 0.1, "IDLE": 0.88, "MAINTENANCE": 0.01, "FAILED": 0.01}},
+          "confidence": 0.93
+        }
+      },
+      "telemetry": {
+        "fuel_level_percent": {"value": 88, "unit": "%", "updated": "2026-08-28T09:40:00Z"}
+      }
+    },
+    {
+      "id": "EQ-003",
+      "type": "Equipment",
+      "attributes": {
+        "equipment_type": {"type": "Enum", "value": "COMBINE_HARVESTER"},
+        "location": {"type": "GeoPoint", "value": {"lat": -13.0550, "lon": 28.3380}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"ACTIVE": 0.0, "IDLE": 0.05, "MAINTENANCE": 0.9, "FAILED": 0.05}},
+          "confidence": 0.97
+        }
+      },
+      "telemetry": {
+        "fuel_level_percent": {"value": 12, "unit": "%", "updated": "2026-08-28T08:12:00Z"}
+      }
+    },
+    {
+      "id": "EQ-004",
+      "type": "Equipment",
+      "attributes": {
+        "equipment_type": {"type": "Enum", "value": "IRRIGATION_PUMP"},
+        "location": {"type": "GeoPoint", "value": {"lat": -13.0719, "lon": 28.3695}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"ACTIVE": 0.92, "IDLE": 0.05, "MAINTENANCE": 0.02, "FAILED": 0.01}},
+          "confidence": 0.96
+        }
+      },
+      "telemetry": {
+        "flow_rate_lpm": {"value": 540, "unit": "L/min", "updated": "2026-08-28T09:41:20Z"}
+      }
+    },
+    {
+      "id": "EQ-005",
+      "type": "Equipment",
+      "attributes": {
+        "equipment_type": {"type": "Enum", "value": "DRONE"},
+        "location": {"type": "GeoPoint", "value": {"lat": -13.0350, "lon": 28.2900, "altitude_m": 120}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"ACTIVE": 0.94, "IDLE": 0.04, "MAINTENANCE": 0.01, "FAILED": 0.01}},
+          "confidence": 0.96
+        }
+      },
+      "telemetry": {
+        "battery_percent": {"value": 71, "unit": "%", "updated": "2026-08-28T09:40:30Z"}
+      }
+    },
+    {
+      "id": "INT-2026-001",
+      "type": "Intervention",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-06-03T07:30:00+02:00"},
+        "intervention_type": {"type": "Enum", "value": "PLANTING"},
+        "applied_materials": {"type": "Object", "value": {"material": "SC-709 seed corn", "quantity": "11.5kg/ha"}}
+      }
+    },
+    {
+      "id": "INT-2026-012",
+      "type": "Intervention",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-07-28T08:20:00+02:00"},
+        "intervention_type": {"type": "Enum", "value": "FERTILIZATION"},
+        "applied_materials": {"type": "Object", "value": {"material": "Urea (46-0-0)", "quantity": "120kg/ha"}}
+      }
+    },
+    {
+      "id": "INT-2026-013",
+      "type": "Intervention",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-05T07:00:00+02:00"},
+        "intervention_type": {"type": "Enum", "value": "PESTICIDE_APPLICATION"},
+        "applied_materials": {"type": "Object", "value": {"material": "Lambda-cyhalothrin", "quantity": "0.4L/ha"}}
+      }
+    },
+    {
+      "id": "INT-2026-014",
+      "type": "Intervention",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-01T06:30:00+02:00"},
+        "intervention_type": {"type": "Enum", "value": "IRRIGATION"},
+        "applied_materials": {"type": "Object", "value": {"material": "water", "quantity": "20mm applied"}}
+      }
+    },
+    {
+      "id": "ENV-2026-08-28-001",
+      "type": "EnvironmentalData",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-28T06:00:00+02:00"},
+        "source": {"type": "Enum", "value": "WEATHER_STATION"},
+        "data_type": {"type": "Enum", "value": "TEMPERATURE"},
+        "value": {"type": "Float", "value": 21.4, "unit": "degC"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "ENV-2026-08-28-003",
+      "type": "EnvironmentalData",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-28T06:00:00+02:00"},
+        "source": {"type": "Enum", "value": "WEATHER_FORECAST"},
+        "data_type": {"type": "Enum", "value": "RAINFALL"},
+        "value": {"type": "Float", "value": 12.5, "unit": "mm"}
+      },
+      "beliefs": {
+        "forecast": {
+          "type": "Normal",
+          "params": {"mean_mm_72h": 12.5, "std_dev": 4.0},
+          "model": "GFS-7day",
+          "horizon_hours": 72,
+          "probability_precip": 0.65,
+          "confidence": 0.6
+        }
+      }
+    },
+    {
+      "id": "ENV-2026-08-27-015",
+      "type": "EnvironmentalData",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-27T12:00:00+02:00"},
+        "source": {"type": "Enum", "value": "SATELLITE_IMAGERY"},
+        "data_type": {"type": "Enum", "value": "NDVI"},
+        "value": {"type": "Float", "value": 0.72, "unit": "index"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "CRP-2025-ZN01-CORN",
+      "type": "Crop",
+      "attributes": {
+        "plant_type": {"type": "Enum", "value": "CORN"},
+        "genetics": {"type": "String", "value": "SC-709"},
+        "season": "2025"
+      },
+      "beliefs": {
+        "yield_prediction": {
+          "type": "Normal",
+          "params": {"mean_tonnes_per_ha": 8.3, "std_dev": 1.2},
+          "unit": "t/ha"
+        }
+      }
+    },
+    {
+      "id": "CRP-2025-ZN02-WHEAT",
+      "type": "Crop",
+      "attributes": {
+        "plant_type": {"type": "Enum", "value": "WHEAT"},
+        "genetics": {"type": "String", "value": "SC-SR414"},
+        "season": "2025"
+      },
+      "beliefs": {
+        "yield_prediction": {
+          "type": "Normal",
+          "params": {"mean_tonnes_per_ha": 5.9, "std_dev": 1.0},
+          "unit": "t/ha"
+        }
+      }
+    },
+    {
+      "id": "CRP-2025-ZN03-SOY",
+      "type": "Crop",
+      "attributes": {
+        "plant_type": {"type": "Enum", "value": "SOYBEANS"},
+        "genetics": {"type": "String", "value": "SCS-200"},
+        "season": "2025"
+      },
+      "beliefs": {
+        "yield_prediction": {
+          "type": "Normal",
+          "params": {"mean_tonnes_per_ha": 3.2, "std_dev": 0.5},
+          "unit": "t/ha"
+        }
+      }
+    },
+    {
+      "id": "YLD-2025-ZN01-CORN",
+      "type": "Yield",
+      "attributes": {
+        "harvest_timestamp": {"type": "DateTime", "value": "2025-10-04T11:00:00+02:00"},
+        "quantity_measured": {"type": "Float", "value": 352.8, "unit": "t"},
+        "quality_grade": {"type": "Enum", "value": "Grade A"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "YLD-2025-ZN02-WHEAT",
+      "type": "Yield",
+      "attributes": {
+        "harvest_timestamp": {"type": "DateTime", "value": "2025-09-22T10:30:00+02:00"},
+        "quantity_measured": {"type": "Float", "value": 341.0, "unit": "t"},
+        "quality_grade": {"type": "Enum", "value": "Grade A"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "YLD-2025-ZN03-SOY",
+      "type": "Yield",
+      "attributes": {
+        "harvest_timestamp": {"type": "DateTime", "value": "2025-10-12T09:45:00+02:00"},
+        "quantity_measured": {"type": "Float", "value": 108.4, "unit": "t"},
+        "quality_grade": {"type": "Enum", "value": "Grade B"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "YLD-2026-ZN01-CORN",
+      "type": "Yield",
+      "attributes": {
+        "harvest_timestamp": {"type": "DateTime", "value": null},
+        "quantity_measured": {"type": "Float", "value": null, "unit": "t"},
+        "quality_grade": {"type": "Enum", "value": null}
+      },
+      "is_observation": false,
+      "status": "PENDING"
+    }
+  ],
+  "edges": [
+    {"from": "CRP-2026-ZN01-CORN", "to": "ZN-01", "type": "planted_in", "weight": 1.0, "prior": "deterministic"},
+    {"from": "CRP-2026-ZN02-WHEAT", "to": "ZN-02", "type": "planted_in", "weight": 1.0, "prior": "deterministic"},
+    {"from": "CRP-2026-ZN03-SOY", "to": "ZN-03", "type": "planted_in", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ZN-01", "to": "CRP-2026-ZN01-CORN", "type": "occupies", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ZN-02", "to": "CRP-2026-ZN02-WHEAT", "type": "occupies", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ZN-03", "to": "CRP-2026-ZN03-SOY", "type": "occupies", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-001", "to": "ZN-01", "type": "applied_to_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-012", "to": "ZN-01", "type": "applied_to_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-013", "to": "ZN-03", "type": "applied_to_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-014", "to": "ZN-01", "type": "applied_to_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-001", "to": "EQ-001", "type": "used_equipment", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-012", "to": "EQ-001", "type": "used_equipment", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-013", "to": "EQ-005", "type": "used_equipment", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-014", "to": "EQ-004", "type": "used_equipment", "weight": 1.0, "prior": "deterministic"},
+    {"from": "EQ-001", "to": "CRP-2026-ZN01-CORN", "type": "alters", "weight": 0.6, "prior": "learned"},
+    {"from": "EQ-001", "to": "CRP-2026-ZN03-SOY", "type": "alters", "weight": 0.6, "prior": "learned"},
+    {"from": "EQ-004", "to": "CRP-2026-ZN02-WHEAT", "type": "alters", "weight": 0.7, "prior": "learned"},
+    {"from": "EQ-005", "to": "CRP-2026-ZN03-SOY", "type": "alters", "weight": 0.55, "prior": "learned"},
+    {"from": "INT-2026-001", "to": "CRP-2026-ZN01-CORN", "type": "targets", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-2026-012", "to": "CRP-2026-ZN01-CORN", "type": "targets", "weight": 0.8, "prior": "learned"},
+    {"from": "INT-2026-013", "to": "CRP-2026-ZN03-SOY", "type": "targets", "weight": 0.75, "prior": "learned"},
+    {"from": "INT-2026-014", "to": "CRP-2026-ZN01-CORN", "type": "targets", "weight": 0.7, "prior": "learned"},
+    {"from": "ENV-2026-08-28-001", "to": "ZN-01", "type": "observes_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ENV-2026-08-28-001", "to": "ZN-02", "type": "observes_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ENV-2026-08-28-001", "to": "ZN-03", "type": "observes_zone", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ENV-2026-08-27-015", "to": "CRP-2026-ZN01-CORN", "type": "observes_crop", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ENV-2026-08-27-015", "to": "CRP-2026-ZN02-WHEAT", "type": "observes_crop", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ENV-2026-08-27-015", "to": "CRP-2026-ZN03-SOY", "type": "observes_crop", "weight": 1.0, "prior": "deterministic"},
+    {"from": "YLD-2025-ZN01-CORN", "to": "CRP-2025-ZN01-CORN", "type": "harvested_from", "weight": 1.0, "prior": "deterministic"},
+    {"from": "YLD-2025-ZN02-WHEAT", "to": "CRP-2025-ZN02-WHEAT", "type": "harvested_from", "weight": 1.0, "prior": "deterministic"},
+    {"from": "YLD-2025-ZN03-SOY", "to": "CRP-2025-ZN03-SOY", "type": "harvested_from", "weight": 1.0, "prior": "deterministic"},
+    {"from": "CRP-2025-ZN01-CORN", "to": "CRP-2026-ZN01-CORN", "type": "records", "weight": 0.95, "prior": "learned", "note": "2025 season informs current yield prior"},
+    {"from": "CRP-2025-ZN02-WHEAT", "to": "CRP-2026-ZN02-WHEAT", "type": "records", "weight": 0.9, "prior": "learned"},
+    {"from": "CRP-2025-ZN03-SOY", "to": "CRP-2026-ZN03-SOY", "type": "records", "weight": 0.9, "prior": "learned"},
+    {"from": "YLD-2026-ZN01-CORN", "to": "CRP-2026-ZN01-CORN", "type": "harvested_from", "weight": 1.0, "prior": "deterministic", "status": "PENDING"}
+  ]
+}
