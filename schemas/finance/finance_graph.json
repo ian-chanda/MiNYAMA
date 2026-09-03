@@ -1,0 +1,127 @@
+{
+  "schema_ref": "finance/Finance_Sector_Schema.md",
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Machine-readable graph representation of the Finance sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+  "meta": {
+    "representation": "graph",
+    "node_types": ["EconomicAgent", "Asset", "Transaction", "Market"],
+    "edge_type_enum": ["holds_asset", "issued_by", "executes_transaction", "trades_in_market", "influences_valuation", "settles_via"],
+    "belief_attr_suffix": ["_model", "_dist", "_ref"],
+    "units_default": "usd"
+  },
+  "nodes": [
+    {
+      "id": "AGT-CB-001",
+      "type": "EconomicAgent",
+      "attributes": {
+        "agent_type": {"type": "Enum", "value": "CENTRAL_BANK"},
+        "jurisdiction": {"type": "String", "value": "Global-US"},
+        "capital_reserves": {"type": "Float", "value": 4.2e12, "unit": "USD"}
+      },
+      "beliefs": {
+        "risk_profile": {
+          "type": "Normal",
+          "params": {"mean_risk_tolerance": 0.05, "std_dev": 0.01},
+          "confidence": 0.98
+        },
+        "liquidity_preference": {
+          "type": "Normal",
+          "params": {"mean_ratio": 0.95, "std_dev": 0.02},
+          "confidence": 0.95
+        }
+      }
+    },
+    {
+      "id": "AGT-INV-101",
+      "type": "EconomicAgent",
+      "attributes": {
+        "agent_type": {"type": "Enum", "value": "INVESTOR"},
+        "institution_name": {"type": "String", "value": "Alpha Capital Management"},
+        "capital_reserves": {"type": "Float", "value": 1.5e9, "unit": "USD"}
+      },
+      "beliefs": {
+        "risk_profile": {
+          "type": "Normal",
+          "params": {"mean_risk_tolerance": 0.45, "std_dev": 0.10},
+          "confidence": 0.85
+        },
+        "liquidity_preference": {
+          "type": "Normal",
+          "params": {"mean_ratio": 0.25, "std_dev": 0.05},
+          "confidence": 0.82
+        }
+      }
+    },
+    {
+      "id": "AST-EQ-AAPL",
+      "type": "Asset",
+      "attributes": {
+        "asset_class": {"type": "Enum", "value": "EQUITY"},
+        "ticker": {"type": "String", "value": "AAPL"},
+        "liquidity_depth": {"type": "Float", "value": 8.5e7, "unit": "USD/day"}
+      },
+      "beliefs": {
+        "valuation_model": {
+          "type": "Normal",
+          "params": {"mean_price": 235.50, "std_dev": 12.40},
+          "unit": "USD",
+          "confidence": 0.89
+        },
+        "volatility_model": {
+          "type": "Normal",
+          "params": {"annualized_vol": 0.18, "std_dev": 0.03},
+          "confidence": 0.91
+        }
+      }
+    },
+    {
+      "id": "AST-BOND-US10Y",
+      "type": "Asset",
+      "attributes": {
+        "asset_class": {"type": "Enum", "value": "FIXED_INCOME"},
+        "cusip": {"type": "String", "value": "912828YS0"},
+        "coupon_rate": {"type": "Float", "value": 4.25, "unit": "%"}
+      },
+      "beliefs": {
+        "valuation_model": {
+          "type": "Normal",
+          "params": {"mean_price": 98.40, "std_dev": 1.80},
+          "unit": "USD",
+          "confidence": 0.94
+        },
+        "volatility_model": {
+          "type": "Normal",
+          "params": {"annualized_vol": 0.07, "std_dev": 0.01},
+          "confidence": 0.95
+        }
+      }
+    },
+    {
+      "id": "MKT-NASDAQ",
+      "type": "Market",
+      "attributes": {
+        "market_type": {"type": "Enum", "value": "EXCHANGE"},
+        "trading_hours": {"type": "String", "value": "09:30-16:00 EST"}
+      }
+    },
+    {
+      "id": "TXN-FIN-2026-001",
+      "type": "Transaction",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-28T14:15:00Z"},
+        "price": {"type": "Float", "value": 236.10, "unit": "USD"},
+        "quantity": {"type": "Int", "value": 5000},
+        "settlement_status": {"type": "Enum", "value": "COMPLETED"}
+      },
+      "is_observation": true
+    }
+  ],
+  "edges": [
+    {"from": "AGT-INV-101", "to": "AST-EQ-AAPL", "type": "holds_asset", "weight": 0.85, "prior": "learned"},
+    {"from": "AGT-CB-001", "to": "AST-BOND-US10Y", "type": "holds_asset", "weight": 0.95, "prior": "learned"},
+    {"from": "TXN-FIN-2026-001", "to": "AGT-INV-101", "type": "executes_transaction", "weight": 1.0, "prior": "deterministic"},
+    {"from": "TXN-FIN-2026-001", "to": "AST-EQ-AAPL", "type": "trades_in_market", "weight": 1.0, "prior": "deterministic"},
+    {"from": "TXN-FIN-2026-001", "to": "MKT-NASDAQ", "type": "settles_via", "weight": 1.0, "prior": "deterministic"},
+    {"from": "AGT-CB-001", "to": "AST-EQ-AAPL", "type": "influences_valuation", "weight": 0.45, "prior": "learned"}
+  ]
+}

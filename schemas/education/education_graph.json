@@ -1,0 +1,167 @@
+{
+  "schema_ref": "education/Education_Sector_Schema.md",
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Machine-readable graph representation of the Education sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+  "meta": {
+    "representation": "graph",
+    "node_types": ["Learner", "KnowledgeConcept", "LearningResource", "LearningInteraction", "MasteryState", "Assessment"],
+    "edge_type_enum": ["belongs_to", "initiated", "uses_resource", "teaches_concept", "prerequisite_for", "assesses_concept", "evaluates_learner", "updates_mastery"],
+    "belief_attr_suffix": ["_model", "_dist", "_ref"],
+    "units_default": "si"
+  },
+  "nodes": [
+    {
+      "id": "LRN-001",
+      "type": "Learner",
+      "attributes": {
+        "demographics": {"type": "Object", "value": {"age": 20, "cohort": "STEM-2026", "background": "Undergraduate"}},
+        "enrolled_at": {"type": "DateTime", "value": "2026-01-15T09:00:00Z"}
+      },
+      "beliefs": {
+        "learning_style": {
+          "type": "Categorical",
+          "params": {"probs": {"VISUAL": 0.65, "KINESTHETIC": 0.25, "AUDITORY": 0.10}},
+          "confidence": 0.85
+        },
+        "engagement_level": {
+          "type": "Normal",
+          "params": {"mean_score": 0.82, "std_dev": 0.08},
+          "confidence": 0.88
+        }
+      }
+    },
+    {
+      "id": "LRN-002",
+      "type": "Learner",
+      "attributes": {
+        "demographics": {"type": "Object", "value": {"age": 22, "cohort": "STEM-2026", "background": "Undergraduate"}},
+        "enrolled_at": {"type": "DateTime", "value": "2026-01-15T09:00:00Z"}
+      },
+      "beliefs": {
+        "learning_style": {
+          "type": "Categorical",
+          "params": {"probs": {"VISUAL": 0.20, "KINESTHETIC": 0.70, "AUDITORY": 0.10}},
+          "confidence": 0.80
+        },
+        "engagement_level": {
+          "type": "Normal",
+          "params": {"mean_score": 0.65, "std_dev": 0.14},
+          "confidence": 0.75
+        }
+      }
+    },
+    {
+      "id": "KC-MATH-101",
+      "type": "KnowledgeConcept",
+      "attributes": {
+        "concept_name": {"type": "String", "value": "Algebraic Foundations"},
+        "description": {"type": "String", "value": "Basic algebraic symbols, expressions, and linear equations."}
+      }
+    },
+    {
+      "id": "KC-MATH-102",
+      "type": "KnowledgeConcept",
+      "attributes": {
+        "concept_name": {"type": "String", "value": "Quadratic Equations"},
+        "description": {"type": "String", "value": "Polynomial functions of degree 2 and factoring methods."}
+      }
+    },
+    {
+      "id": "RES-VID-101",
+      "type": "LearningResource",
+      "attributes": {
+        "resource_type": {"type": "Enum", "value": "VIDEO"},
+        "title": {"type": "String", "value": "Interactive Algebra Video Lecture"}
+      },
+      "beliefs": {
+        "difficulty_level": {
+          "type": "Normal",
+          "params": {"mean_difficulty": 0.35, "std_dev": 0.05},
+          "confidence": 0.90
+        },
+        "efficacy_model": {
+          "type": "Normal",
+          "params": {"mean_gain": 0.25, "std_dev": 0.04},
+          "confidence": 0.87
+        }
+      }
+    },
+    {
+      "id": "RES-SIM-102",
+      "type": "LearningResource",
+      "attributes": {
+        "resource_type": {"type": "Enum", "value": "INTERACTIVE_SIMULATION"},
+        "title": {"type": "String", "value": "Quadratic Curve Explorer"}
+      },
+      "beliefs": {
+        "difficulty_level": {
+          "type": "Normal",
+          "params": {"mean_difficulty": 0.65, "std_dev": 0.08},
+          "confidence": 0.85
+        },
+        "efficacy_model": {
+          "type": "Normal",
+          "params": {"mean_gain": 0.38, "std_dev": 0.06},
+          "confidence": 0.82
+        }
+      }
+    },
+    {
+      "id": "MST-LRN001-MATH",
+      "type": "MasteryState",
+      "attributes": {
+        "last_updated": {"type": "DateTime", "value": "2026-08-25T14:30:00Z"}
+      },
+      "beliefs": {
+        "KC-MATH-101": {
+          "type": "Categorical",
+          "params": {"probs": {"NOT_SEEN": 0.0, "INTRODUCED": 0.05, "PRACTICING": 0.15, "MASTERED": 0.80}},
+          "confidence": 0.90
+        },
+        "KC-MATH-102": {
+          "type": "Categorical",
+          "params": {"probs": {"NOT_SEEN": 0.10, "INTRODUCED": 0.60, "PRACTICING": 0.25, "MASTERED": 0.05}},
+          "confidence": 0.78
+        }
+      }
+    },
+    {
+      "id": "INT-ED-2026-001",
+      "type": "LearningInteraction",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-25T14:00:00Z"},
+        "interaction_type": {"type": "Enum", "value": "WATCH_VIDEO"},
+        "duration": {"type": "Duration", "value": 1200, "unit": "seconds"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "ASM-2026-QUIZ1",
+      "type": "Assessment",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-26T10:00:00Z"},
+        "actual_score": {"type": "Float", "value": 88.5, "unit": "%"}
+      },
+      "beliefs": {
+        "predicted_score_dist": {
+          "type": "Normal",
+          "params": {"mean_score": 82.0, "std_dev": 5.5},
+          "unit": "%",
+          "confidence": 0.85
+        }
+      },
+      "is_observation": true
+    }
+  ],
+  "edges": [
+    {"from": "MST-LRN001-MATH", "to": "LRN-001", "type": "belongs_to", "weight": 1.0, "prior": "deterministic"},
+    {"from": "LRN-001", "to": "INT-ED-2026-001", "type": "initiated", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-ED-2026-001", "to": "RES-VID-101", "type": "uses_resource", "weight": 1.0, "prior": "deterministic"},
+    {"from": "RES-VID-101", "to": "KC-MATH-101", "type": "teaches_concept", "weight": 0.90, "prior": "learned"},
+    {"from": "RES-SIM-102", "to": "KC-MATH-102", "type": "teaches_concept", "weight": 0.85, "prior": "learned"},
+    {"from": "KC-MATH-101", "to": "KC-MATH-102", "type": "prerequisite_for", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASM-2026-QUIZ1", "to": "KC-MATH-101", "type": "assesses_concept", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASM-2026-QUIZ1", "to": "LRN-001", "type": "evaluates_learner", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASM-2026-QUIZ1", "to": "MST-LRN001-MATH", "type": "updates_mastery", "weight": 0.88, "prior": "learned"}
+  ]
+}

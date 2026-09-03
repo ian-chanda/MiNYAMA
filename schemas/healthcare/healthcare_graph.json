@@ -1,0 +1,106 @@
+{
+  "schema_ref": "healthcare/Healthcare_Sector_Schema.md",
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Machine-readable graph representation of the Healthcare sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+  "meta": {
+    "representation": "graph",
+    "node_types": ["Patient", "Provider", "Encounter", "Intervention", "HealthState"],
+    "edge_type_enum": ["has_health_state", "conducts_encounter", "participates_in", "administers_intervention", "alters_health_state", "prescribes"],
+    "belief_attr_suffix": ["_model", "_dist", "_ref"],
+    "units_default": "si"
+  },
+  "nodes": [
+    {
+      "id": "PAT-001",
+      "type": "Patient",
+      "attributes": {
+        "demographics": {"type": "Object", "value": {"age": 58, "sex": "M", "risk_cohort": "CARDIOMETABOLIC"}},
+        "registered_at": {"type": "DateTime", "value": "2024-03-10T10:00:00Z"}
+      },
+      "beliefs": {
+        "care_plan_adherence": {
+          "type": "Normal",
+          "params": {"mean_adherence": 0.85, "std_dev": 0.07},
+          "confidence": 0.88
+        }
+      }
+    },
+    {
+      "id": "PRV-HOSP-01",
+      "type": "Provider",
+      "attributes": {
+        "provider_type": {"type": "Enum", "value": "HOSPITAL"},
+        "specialization": {"type": "Array", "value": ["Cardiology", "Endocrinology"]},
+        "facility_name": {"type": "String", "value": "Central Metropolitan Medical Center"}
+      },
+      "beliefs": {
+        "resource_capacity": {
+          "type": "Normal",
+          "params": {"bed_occupancy_percent": 78.5, "std_dev": 5.2},
+          "confidence": 0.94
+        },
+        "treatment_efficacy_model": {
+          "type": "Normal",
+          "params": {"success_rate": 0.91, "std_dev": 0.03},
+          "confidence": 0.92
+        }
+      }
+    },
+    {
+      "id": "HST-PAT001-2026",
+      "type": "HealthState",
+      "attributes": {
+        "diagnoses": {"type": "Array", "value": ["E11.9 (Type 2 Diabetes)", "I10 (Essential Hypertension)"]},
+        "quality_of_life": {"type": "Float", "value": 0.78, "unit": "index"}
+      },
+      "beliefs": {
+        "vital_signs": {
+          "type": "MultivariateNormal",
+          "params": {"means": {"systolic_bp": 132.0, "diastolic_bp": 84.0, "hba1c": 6.8, "heart_rate": 72.0}},
+          "covariance_scale": 0.05,
+          "confidence": 0.89
+        },
+        "prognosis_model": {
+          "type": "Categorical",
+          "params": {"probs": {"STABLE": 0.82, "DETERIORATING": 0.12, "CRITICAL": 0.02, "IMPROVING": 0.04}},
+          "confidence": 0.85
+        }
+      }
+    },
+    {
+      "id": "INT-MED-METFORMIN",
+      "type": "Intervention",
+      "attributes": {
+        "intervention_type": {"type": "Enum", "value": "MEDICATION"},
+        "drug_name": {"type": "String", "value": "Metformin Extended-Release"},
+        "dosage": {"type": "String", "value": "1000mg daily"}
+      },
+      "beliefs": {
+        "expected_efficacy_model": {
+          "type": "Normal",
+          "params": {"hba1c_reduction": 1.2, "std_dev": 0.2},
+          "unit": "%",
+          "confidence": 0.93
+        }
+      }
+    },
+    {
+      "id": "ENC-HC-2026-001",
+      "type": "Encounter",
+      "attributes": {
+        "timestamp": {"type": "DateTime", "value": "2026-08-20T11:30:00Z"},
+        "encounter_type": {"type": "Enum", "value": "CONSULTATION"},
+        "outcome_assessment": {"type": "String", "value": "Glycemic control improving; continue current regimen."}
+      },
+      "is_observation": true
+    }
+  ],
+  "edges": [
+    {"from": "PAT-001", "to": "HST-PAT001-2026", "type": "has_health_state", "weight": 1.0, "prior": "deterministic"},
+    {"from": "PRV-HOSP-01", "to": "ENC-HC-2026-001", "type": "conducts_encounter", "weight": 1.0, "prior": "deterministic"},
+    {"from": "PAT-001", "to": "ENC-HC-2026-001", "type": "participates_in", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ENC-HC-2026-001", "to": "INT-MED-METFORMIN", "type": "prescribes", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-MED-METFORMIN", "to": "HST-PAT001-2026", "type": "alters_health_state", "weight": 0.88, "prior": "learned"},
+    {"from": "PRV-HOSP-01", "to": "INT-MED-METFORMIN", "type": "administers_intervention", "weight": 0.95, "prior": "learned"}
+  ]
+}

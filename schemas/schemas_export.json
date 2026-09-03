@@ -1,0 +1,2800 @@
+{
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Unified export of all MiNYAMA sector graph schemas for Jupyter Notebook exploration.",
+  "sectors": {
+    "agriculture": {
+      "schema_ref": "agriculture/Agriculture_Sector_Schema.md",
+      "generated_by": "MiNYAMA schema hardener",
+      "description": "Machine-readable graph representation of the Agriculture sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; _Ref relations are typed, weighted edges.",
+      "meta": {
+        "representation": "graph",
+        "node_types": [
+          "Zone",
+          "Crop",
+          "Equipment",
+          "Intervention",
+          "EnvironmentalData",
+          "Yield"
+        ],
+        "edge_type_enum": [
+          "planted_in",
+          "occupies",
+          "applied_to_zone",
+          "used_equipment",
+          "observes_zone",
+          "observes_crop",
+          "harvested_from",
+          "alters",
+          "targets",
+          "records"
+        ],
+        "belief_attr_suffix": [
+          "_model",
+          "_dist",
+          "_ref"
+        ],
+        "units_default": "si"
+      },
+      "nodes": [
+        {
+          "id": "ZN-01",
+          "type": "Zone",
+          "attributes": {
+            "location_polygon": {
+              "type": "GeoJSON/Polygon",
+              "value": {}
+            },
+            "size_hectares": {
+              "type": "Float",
+              "value": 42.5,
+              "unit": "ha"
+            }
+          },
+          "beliefs": {
+            "soil": {
+              "type": "MultivariateNormal",
+              "params": {
+                "means": {
+                  "N": 65,
+                  "P": 22,
+                  "K": 48,
+                  "organic_matter": 3.2,
+                  "ph": 6.4
+                }
+              },
+              "covariance_scale": 0.08,
+              "confidence": 0.87
+            },
+            "moisture": {
+              "type": "Normal",
+              "params": {
+                "mean_volumetric_percent": 38.2,
+                "std_dev": 4.1
+              },
+              "confidence": 0.87,
+              "source": "capacitance_probe"
+            }
+          }
+        },
+        {
+          "id": "ZN-02",
+          "type": "Zone",
+          "attributes": {
+            "location_polygon": {
+              "type": "GeoJSON/Polygon",
+              "value": {}
+            },
+            "size_hectares": {
+              "type": "Float",
+              "value": 58.0,
+              "unit": "ha"
+            }
+          },
+          "beliefs": {
+            "soil": {
+              "type": "MultivariateNormal",
+              "params": {
+                "means": {
+                  "N": 48,
+                  "P": 18,
+                  "K": 60,
+                  "organic_matter": 2.8,
+                  "ph": 6.1
+                }
+              },
+              "covariance_scale": 0.1,
+              "confidence": 0.84
+            },
+            "moisture": {
+              "type": "Normal",
+              "params": {
+                "mean_volumetric_percent": 31.5,
+                "std_dev": 5.2
+              },
+              "confidence": 0.84,
+              "source": "capacitance_probe"
+            }
+          }
+        },
+        {
+          "id": "ZN-03",
+          "type": "Zone",
+          "attributes": {
+            "location_polygon": {
+              "type": "GeoJSON/Polygon",
+              "value": {}
+            },
+            "size_hectares": {
+              "type": "Float",
+              "value": 33.0,
+              "unit": "ha"
+            }
+          },
+          "beliefs": {
+            "soil": {
+              "type": "MultivariateNormal",
+              "params": {
+                "means": {
+                  "N": 72,
+                  "P": 30,
+                  "K": 55,
+                  "organic_matter": 3.6,
+                  "ph": 6.7
+                }
+              },
+              "covariance_scale": 0.07,
+              "confidence": 0.9
+            },
+            "moisture": {
+              "type": "Normal",
+              "params": {
+                "mean_volumetric_percent": 42.0,
+                "std_dev": 3.6
+              },
+              "confidence": 0.9,
+              "source": "capacitance_probe"
+            }
+          }
+        },
+        {
+          "id": "CRP-2026-ZN01-CORN",
+          "type": "Crop",
+          "attributes": {
+            "plant_type": {
+              "type": "Enum",
+              "value": "CORN"
+            },
+            "genetics": {
+              "type": "String",
+              "value": "SC-709"
+            },
+            "planted_at": {
+              "type": "DateTime",
+              "value": "2026-06-03T07:30:00+02:00"
+            }
+          },
+          "beliefs": {
+            "growth_stage": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "GERMINATION": 0.0,
+                  "VEGETATIVE": 0.04,
+                  "FLOWERING": 0.9,
+                  "MATURITY": 0.06
+                }
+              },
+              "gdd_accumulated": 1420,
+              "days_since_planting": 86,
+              "confidence": 0.82
+            },
+            "health": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "HEALTHY": 0.79,
+                  "STRESSED": 0.15,
+                  "INFESTED": 0.05,
+                  "DISEASED": 0.01
+                }
+              },
+              "confidence": 0.79
+            },
+            "yield_prediction": {
+              "type": "Normal",
+              "params": {
+                "mean_tonnes_per_ha": 8.6,
+                "std_dev": 1.1
+              },
+              "unit": "t/ha",
+              "confidence": 0.82
+            }
+          }
+        },
+        {
+          "id": "CRP-2026-ZN02-WHEAT",
+          "type": "Crop",
+          "attributes": {
+            "plant_type": {
+              "type": "Enum",
+              "value": "WHEAT"
+            },
+            "genetics": {
+              "type": "String",
+              "value": "SC-SR414"
+            },
+            "planted_at": {
+              "type": "DateTime",
+              "value": "2026-06-05T07:15:00+02:00"
+            }
+          },
+          "beliefs": {
+            "growth_stage": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "GERMINATION": 0.0,
+                  "VEGETATIVE": 0.9,
+                  "FLOWERING": 0.08,
+                  "MATURITY": 0.02
+                }
+              },
+              "gdd_accumulated": 1240,
+              "days_since_planting": 74,
+              "confidence": 0.81
+            },
+            "health": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "HEALTHY": 0.74,
+                  "STRESSED": 0.2,
+                  "INFESTED": 0.05,
+                  "DISEASED": 0.01
+                }
+              },
+              "confidence": 0.74
+            },
+            "yield_prediction": {
+              "type": "Normal",
+              "params": {
+                "mean_tonnes_per_ha": 6.2,
+                "std_dev": 0.9
+              },
+              "unit": "t/ha",
+              "confidence": 0.81
+            }
+          }
+        },
+        {
+          "id": "CRP-2026-ZN03-SOY",
+          "type": "Crop",
+          "attributes": {
+            "plant_type": {
+              "type": "Enum",
+              "value": "SOYBEANS"
+            },
+            "genetics": {
+              "type": "String",
+              "value": "SCS-200"
+            },
+            "planted_at": {
+              "type": "DateTime",
+              "value": "2026-06-04T08:00:00+02:00"
+            }
+          },
+          "beliefs": {
+            "growth_stage": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "GERMINATION": 0.0,
+                  "VEGETATIVE": 0.05,
+                  "FLOWERING": 0.9,
+                  "MATURITY": 0.05
+                }
+              },
+              "gdd_accumulated": 1360,
+              "days_since_planting": 79,
+              "confidence": 0.85
+            },
+            "health": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "HEALTHY": 0.77,
+                  "STRESSED": 0.13,
+                  "INFESTED": 0.09,
+                  "DISEASED": 0.01
+                }
+              },
+              "confidence": 0.77
+            },
+            "yield_prediction": {
+              "type": "Normal",
+              "params": {
+                "mean_tonnes_per_ha": 3.4,
+                "std_dev": 0.4
+              },
+              "unit": "t/ha",
+              "confidence": 0.85
+            }
+          }
+        },
+        {
+          "id": "EQ-001",
+          "type": "Equipment",
+          "attributes": {
+            "equipment_type": {
+              "type": "Enum",
+              "value": "TRACTOR"
+            },
+            "location": {
+              "type": "GeoPoint",
+              "value": {
+                "lat": -13.0401,
+                "lon": 28.292
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "ACTIVE": 0.9,
+                  "IDLE": 0.05,
+                  "MAINTENANCE": 0.03,
+                  "FAILED": 0.02
+                }
+              },
+              "confidence": 0.95
+            }
+          },
+          "telemetry": {
+            "fuel_level_percent": {
+              "value": 62,
+              "unit": "%",
+              "updated": "2026-08-28T09:41:00Z"
+            }
+          }
+        },
+        {
+          "id": "EQ-002",
+          "type": "Equipment",
+          "attributes": {
+            "equipment_type": {
+              "type": "Enum",
+              "value": "TRACTOR"
+            },
+            "location": {
+              "type": "GeoPoint",
+              "value": {
+                "lat": -13.0512,
+                "lon": 28.3305
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "ACTIVE": 0.1,
+                  "IDLE": 0.88,
+                  "MAINTENANCE": 0.01,
+                  "FAILED": 0.01
+                }
+              },
+              "confidence": 0.93
+            }
+          },
+          "telemetry": {
+            "fuel_level_percent": {
+              "value": 88,
+              "unit": "%",
+              "updated": "2026-08-28T09:40:00Z"
+            }
+          }
+        },
+        {
+          "id": "EQ-003",
+          "type": "Equipment",
+          "attributes": {
+            "equipment_type": {
+              "type": "Enum",
+              "value": "COMBINE_HARVESTER"
+            },
+            "location": {
+              "type": "GeoPoint",
+              "value": {
+                "lat": -13.055,
+                "lon": 28.338
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "ACTIVE": 0.0,
+                  "IDLE": 0.05,
+                  "MAINTENANCE": 0.9,
+                  "FAILED": 0.05
+                }
+              },
+              "confidence": 0.97
+            }
+          },
+          "telemetry": {
+            "fuel_level_percent": {
+              "value": 12,
+              "unit": "%",
+              "updated": "2026-08-28T08:12:00Z"
+            }
+          }
+        },
+        {
+          "id": "EQ-004",
+          "type": "Equipment",
+          "attributes": {
+            "equipment_type": {
+              "type": "Enum",
+              "value": "IRRIGATION_PUMP"
+            },
+            "location": {
+              "type": "GeoPoint",
+              "value": {
+                "lat": -13.0719,
+                "lon": 28.3695
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "ACTIVE": 0.92,
+                  "IDLE": 0.05,
+                  "MAINTENANCE": 0.02,
+                  "FAILED": 0.01
+                }
+              },
+              "confidence": 0.96
+            }
+          },
+          "telemetry": {
+            "flow_rate_lpm": {
+              "value": 540,
+              "unit": "L/min",
+              "updated": "2026-08-28T09:41:20Z"
+            }
+          }
+        },
+        {
+          "id": "EQ-005",
+          "type": "Equipment",
+          "attributes": {
+            "equipment_type": {
+              "type": "Enum",
+              "value": "DRONE"
+            },
+            "location": {
+              "type": "GeoPoint",
+              "value": {
+                "lat": -13.035,
+                "lon": 28.29,
+                "altitude_m": 120
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "ACTIVE": 0.94,
+                  "IDLE": 0.04,
+                  "MAINTENANCE": 0.01,
+                  "FAILED": 0.01
+                }
+              },
+              "confidence": 0.96
+            }
+          },
+          "telemetry": {
+            "battery_percent": {
+              "value": 71,
+              "unit": "%",
+              "updated": "2026-08-28T09:40:30Z"
+            }
+          }
+        },
+        {
+          "id": "INT-2026-001",
+          "type": "Intervention",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-06-03T07:30:00+02:00"
+            },
+            "intervention_type": {
+              "type": "Enum",
+              "value": "PLANTING"
+            },
+            "applied_materials": {
+              "type": "Object",
+              "value": {
+                "material": "SC-709 seed corn",
+                "quantity": "11.5kg/ha"
+              }
+            }
+          }
+        },
+        {
+          "id": "INT-2026-012",
+          "type": "Intervention",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-07-28T08:20:00+02:00"
+            },
+            "intervention_type": {
+              "type": "Enum",
+              "value": "FERTILIZATION"
+            },
+            "applied_materials": {
+              "type": "Object",
+              "value": {
+                "material": "Urea (46-0-0)",
+                "quantity": "120kg/ha"
+              }
+            }
+          }
+        },
+        {
+          "id": "INT-2026-013",
+          "type": "Intervention",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-05T07:00:00+02:00"
+            },
+            "intervention_type": {
+              "type": "Enum",
+              "value": "PESTICIDE_APPLICATION"
+            },
+            "applied_materials": {
+              "type": "Object",
+              "value": {
+                "material": "Lambda-cyhalothrin",
+                "quantity": "0.4L/ha"
+              }
+            }
+          }
+        },
+        {
+          "id": "INT-2026-014",
+          "type": "Intervention",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-01T06:30:00+02:00"
+            },
+            "intervention_type": {
+              "type": "Enum",
+              "value": "IRRIGATION"
+            },
+            "applied_materials": {
+              "type": "Object",
+              "value": {
+                "material": "water",
+                "quantity": "20mm applied"
+              }
+            }
+          }
+        },
+        {
+          "id": "ENV-2026-08-28-001",
+          "type": "EnvironmentalData",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-28T06:00:00+02:00"
+            },
+            "source": {
+              "type": "Enum",
+              "value": "WEATHER_STATION"
+            },
+            "data_type": {
+              "type": "Enum",
+              "value": "TEMPERATURE"
+            },
+            "value": {
+              "type": "Float",
+              "value": 21.4,
+              "unit": "degC"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "ENV-2026-08-28-003",
+          "type": "EnvironmentalData",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-28T06:00:00+02:00"
+            },
+            "source": {
+              "type": "Enum",
+              "value": "WEATHER_FORECAST"
+            },
+            "data_type": {
+              "type": "Enum",
+              "value": "RAINFALL"
+            },
+            "value": {
+              "type": "Float",
+              "value": 12.5,
+              "unit": "mm"
+            }
+          },
+          "beliefs": {
+            "forecast": {
+              "type": "Normal",
+              "params": {
+                "mean_mm_72h": 12.5,
+                "std_dev": 4.0
+              },
+              "model": "GFS-7day",
+              "horizon_hours": 72,
+              "probability_precip": 0.65,
+              "confidence": 0.6
+            }
+          }
+        },
+        {
+          "id": "ENV-2026-08-27-015",
+          "type": "EnvironmentalData",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-27T12:00:00+02:00"
+            },
+            "source": {
+              "type": "Enum",
+              "value": "SATELLITE_IMAGERY"
+            },
+            "data_type": {
+              "type": "Enum",
+              "value": "NDVI"
+            },
+            "value": {
+              "type": "Float",
+              "value": 0.72,
+              "unit": "index"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "CRP-2025-ZN01-CORN",
+          "type": "Crop",
+          "attributes": {
+            "plant_type": {
+              "type": "Enum",
+              "value": "CORN"
+            },
+            "genetics": {
+              "type": "String",
+              "value": "SC-709"
+            },
+            "season": "2025"
+          },
+          "beliefs": {
+            "yield_prediction": {
+              "type": "Normal",
+              "params": {
+                "mean_tonnes_per_ha": 8.3,
+                "std_dev": 1.2
+              },
+              "unit": "t/ha"
+            }
+          }
+        },
+        {
+          "id": "CRP-2025-ZN02-WHEAT",
+          "type": "Crop",
+          "attributes": {
+            "plant_type": {
+              "type": "Enum",
+              "value": "WHEAT"
+            },
+            "genetics": {
+              "type": "String",
+              "value": "SC-SR414"
+            },
+            "season": "2025"
+          },
+          "beliefs": {
+            "yield_prediction": {
+              "type": "Normal",
+              "params": {
+                "mean_tonnes_per_ha": 5.9,
+                "std_dev": 1.0
+              },
+              "unit": "t/ha"
+            }
+          }
+        },
+        {
+          "id": "CRP-2025-ZN03-SOY",
+          "type": "Crop",
+          "attributes": {
+            "plant_type": {
+              "type": "Enum",
+              "value": "SOYBEANS"
+            },
+            "genetics": {
+              "type": "String",
+              "value": "SCS-200"
+            },
+            "season": "2025"
+          },
+          "beliefs": {
+            "yield_prediction": {
+              "type": "Normal",
+              "params": {
+                "mean_tonnes_per_ha": 3.2,
+                "std_dev": 0.5
+              },
+              "unit": "t/ha"
+            }
+          }
+        },
+        {
+          "id": "YLD-2025-ZN01-CORN",
+          "type": "Yield",
+          "attributes": {
+            "harvest_timestamp": {
+              "type": "DateTime",
+              "value": "2025-10-04T11:00:00+02:00"
+            },
+            "quantity_measured": {
+              "type": "Float",
+              "value": 352.8,
+              "unit": "t"
+            },
+            "quality_grade": {
+              "type": "Enum",
+              "value": "Grade A"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "YLD-2025-ZN02-WHEAT",
+          "type": "Yield",
+          "attributes": {
+            "harvest_timestamp": {
+              "type": "DateTime",
+              "value": "2025-09-22T10:30:00+02:00"
+            },
+            "quantity_measured": {
+              "type": "Float",
+              "value": 341.0,
+              "unit": "t"
+            },
+            "quality_grade": {
+              "type": "Enum",
+              "value": "Grade A"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "YLD-2025-ZN03-SOY",
+          "type": "Yield",
+          "attributes": {
+            "harvest_timestamp": {
+              "type": "DateTime",
+              "value": "2025-10-12T09:45:00+02:00"
+            },
+            "quantity_measured": {
+              "type": "Float",
+              "value": 108.4,
+              "unit": "t"
+            },
+            "quality_grade": {
+              "type": "Enum",
+              "value": "Grade B"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "YLD-2026-ZN01-CORN",
+          "type": "Yield",
+          "attributes": {
+            "harvest_timestamp": {
+              "type": "DateTime",
+              "value": null
+            },
+            "quantity_measured": {
+              "type": "Float",
+              "value": null,
+              "unit": "t"
+            },
+            "quality_grade": {
+              "type": "Enum",
+              "value": null
+            }
+          },
+          "is_observation": false,
+          "status": "PENDING"
+        }
+      ],
+      "edges": [
+        {
+          "from": "CRP-2026-ZN01-CORN",
+          "to": "ZN-01",
+          "type": "planted_in",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "CRP-2026-ZN02-WHEAT",
+          "to": "ZN-02",
+          "type": "planted_in",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "CRP-2026-ZN03-SOY",
+          "to": "ZN-03",
+          "type": "planted_in",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ZN-01",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "occupies",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ZN-02",
+          "to": "CRP-2026-ZN02-WHEAT",
+          "type": "occupies",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ZN-03",
+          "to": "CRP-2026-ZN03-SOY",
+          "type": "occupies",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-001",
+          "to": "ZN-01",
+          "type": "applied_to_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-012",
+          "to": "ZN-01",
+          "type": "applied_to_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-013",
+          "to": "ZN-03",
+          "type": "applied_to_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-014",
+          "to": "ZN-01",
+          "type": "applied_to_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-001",
+          "to": "EQ-001",
+          "type": "used_equipment",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-012",
+          "to": "EQ-001",
+          "type": "used_equipment",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-013",
+          "to": "EQ-005",
+          "type": "used_equipment",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-014",
+          "to": "EQ-004",
+          "type": "used_equipment",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "EQ-001",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "alters",
+          "weight": 0.6,
+          "prior": "learned"
+        },
+        {
+          "from": "EQ-001",
+          "to": "CRP-2026-ZN03-SOY",
+          "type": "alters",
+          "weight": 0.6,
+          "prior": "learned"
+        },
+        {
+          "from": "EQ-004",
+          "to": "CRP-2026-ZN02-WHEAT",
+          "type": "alters",
+          "weight": 0.7,
+          "prior": "learned"
+        },
+        {
+          "from": "EQ-005",
+          "to": "CRP-2026-ZN03-SOY",
+          "type": "alters",
+          "weight": 0.55,
+          "prior": "learned"
+        },
+        {
+          "from": "INT-2026-001",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "targets",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-2026-012",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "targets",
+          "weight": 0.8,
+          "prior": "learned"
+        },
+        {
+          "from": "INT-2026-013",
+          "to": "CRP-2026-ZN03-SOY",
+          "type": "targets",
+          "weight": 0.75,
+          "prior": "learned"
+        },
+        {
+          "from": "INT-2026-014",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "targets",
+          "weight": 0.7,
+          "prior": "learned"
+        },
+        {
+          "from": "ENV-2026-08-28-001",
+          "to": "ZN-01",
+          "type": "observes_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ENV-2026-08-28-001",
+          "to": "ZN-02",
+          "type": "observes_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ENV-2026-08-28-001",
+          "to": "ZN-03",
+          "type": "observes_zone",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ENV-2026-08-27-015",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "observes_crop",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ENV-2026-08-27-015",
+          "to": "CRP-2026-ZN02-WHEAT",
+          "type": "observes_crop",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ENV-2026-08-27-015",
+          "to": "CRP-2026-ZN03-SOY",
+          "type": "observes_crop",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "YLD-2025-ZN01-CORN",
+          "to": "CRP-2025-ZN01-CORN",
+          "type": "harvested_from",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "YLD-2025-ZN02-WHEAT",
+          "to": "CRP-2025-ZN02-WHEAT",
+          "type": "harvested_from",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "YLD-2025-ZN03-SOY",
+          "to": "CRP-2025-ZN03-SOY",
+          "type": "harvested_from",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "CRP-2025-ZN01-CORN",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "records",
+          "weight": 0.95,
+          "prior": "learned",
+          "note": "2025 season informs current yield prior"
+        },
+        {
+          "from": "CRP-2025-ZN02-WHEAT",
+          "to": "CRP-2026-ZN02-WHEAT",
+          "type": "records",
+          "weight": 0.9,
+          "prior": "learned"
+        },
+        {
+          "from": "CRP-2025-ZN03-SOY",
+          "to": "CRP-2026-ZN03-SOY",
+          "type": "records",
+          "weight": 0.9,
+          "prior": "learned"
+        },
+        {
+          "from": "YLD-2026-ZN01-CORN",
+          "to": "CRP-2026-ZN01-CORN",
+          "type": "harvested_from",
+          "weight": 1.0,
+          "prior": "deterministic",
+          "status": "PENDING"
+        }
+      ]
+    },
+    "education": {
+      "schema_ref": "education/Education_Sector_Schema.md",
+      "generated_by": "MiNYAMA schema hardener",
+      "description": "Machine-readable graph representation of the Education sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+      "meta": {
+        "representation": "graph",
+        "node_types": [
+          "Learner",
+          "KnowledgeConcept",
+          "LearningResource",
+          "LearningInteraction",
+          "MasteryState",
+          "Assessment"
+        ],
+        "edge_type_enum": [
+          "belongs_to",
+          "initiated",
+          "uses_resource",
+          "teaches_concept",
+          "prerequisite_for",
+          "assesses_concept",
+          "evaluates_learner",
+          "updates_mastery"
+        ],
+        "belief_attr_suffix": [
+          "_model",
+          "_dist",
+          "_ref"
+        ],
+        "units_default": "si"
+      },
+      "nodes": [
+        {
+          "id": "LRN-001",
+          "type": "Learner",
+          "attributes": {
+            "demographics": {
+              "type": "Object",
+              "value": {
+                "age": 20,
+                "cohort": "STEM-2026",
+                "background": "Undergraduate"
+              }
+            },
+            "enrolled_at": {
+              "type": "DateTime",
+              "value": "2026-01-15T09:00:00Z"
+            }
+          },
+          "beliefs": {
+            "learning_style": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "VISUAL": 0.65,
+                  "KINESTHETIC": 0.25,
+                  "AUDITORY": 0.1
+                }
+              },
+              "confidence": 0.85
+            },
+            "engagement_level": {
+              "type": "Normal",
+              "params": {
+                "mean_score": 0.82,
+                "std_dev": 0.08
+              },
+              "confidence": 0.88
+            }
+          }
+        },
+        {
+          "id": "LRN-002",
+          "type": "Learner",
+          "attributes": {
+            "demographics": {
+              "type": "Object",
+              "value": {
+                "age": 22,
+                "cohort": "STEM-2026",
+                "background": "Undergraduate"
+              }
+            },
+            "enrolled_at": {
+              "type": "DateTime",
+              "value": "2026-01-15T09:00:00Z"
+            }
+          },
+          "beliefs": {
+            "learning_style": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "VISUAL": 0.2,
+                  "KINESTHETIC": 0.7,
+                  "AUDITORY": 0.1
+                }
+              },
+              "confidence": 0.8
+            },
+            "engagement_level": {
+              "type": "Normal",
+              "params": {
+                "mean_score": 0.65,
+                "std_dev": 0.14
+              },
+              "confidence": 0.75
+            }
+          }
+        },
+        {
+          "id": "KC-MATH-101",
+          "type": "KnowledgeConcept",
+          "attributes": {
+            "concept_name": {
+              "type": "String",
+              "value": "Algebraic Foundations"
+            },
+            "description": {
+              "type": "String",
+              "value": "Basic algebraic symbols, expressions, and linear equations."
+            }
+          }
+        },
+        {
+          "id": "KC-MATH-102",
+          "type": "KnowledgeConcept",
+          "attributes": {
+            "concept_name": {
+              "type": "String",
+              "value": "Quadratic Equations"
+            },
+            "description": {
+              "type": "String",
+              "value": "Polynomial functions of degree 2 and factoring methods."
+            }
+          }
+        },
+        {
+          "id": "RES-VID-101",
+          "type": "LearningResource",
+          "attributes": {
+            "resource_type": {
+              "type": "Enum",
+              "value": "VIDEO"
+            },
+            "title": {
+              "type": "String",
+              "value": "Interactive Algebra Video Lecture"
+            }
+          },
+          "beliefs": {
+            "difficulty_level": {
+              "type": "Normal",
+              "params": {
+                "mean_difficulty": 0.35,
+                "std_dev": 0.05
+              },
+              "confidence": 0.9
+            },
+            "efficacy_model": {
+              "type": "Normal",
+              "params": {
+                "mean_gain": 0.25,
+                "std_dev": 0.04
+              },
+              "confidence": 0.87
+            }
+          }
+        },
+        {
+          "id": "RES-SIM-102",
+          "type": "LearningResource",
+          "attributes": {
+            "resource_type": {
+              "type": "Enum",
+              "value": "INTERACTIVE_SIMULATION"
+            },
+            "title": {
+              "type": "String",
+              "value": "Quadratic Curve Explorer"
+            }
+          },
+          "beliefs": {
+            "difficulty_level": {
+              "type": "Normal",
+              "params": {
+                "mean_difficulty": 0.65,
+                "std_dev": 0.08
+              },
+              "confidence": 0.85
+            },
+            "efficacy_model": {
+              "type": "Normal",
+              "params": {
+                "mean_gain": 0.38,
+                "std_dev": 0.06
+              },
+              "confidence": 0.82
+            }
+          }
+        },
+        {
+          "id": "MST-LRN001-MATH",
+          "type": "MasteryState",
+          "attributes": {
+            "last_updated": {
+              "type": "DateTime",
+              "value": "2026-08-25T14:30:00Z"
+            }
+          },
+          "beliefs": {
+            "KC-MATH-101": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "NOT_SEEN": 0.0,
+                  "INTRODUCED": 0.05,
+                  "PRACTICING": 0.15,
+                  "MASTERED": 0.8
+                }
+              },
+              "confidence": 0.9
+            },
+            "KC-MATH-102": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "NOT_SEEN": 0.1,
+                  "INTRODUCED": 0.6,
+                  "PRACTICING": 0.25,
+                  "MASTERED": 0.05
+                }
+              },
+              "confidence": 0.78
+            }
+          }
+        },
+        {
+          "id": "INT-ED-2026-001",
+          "type": "LearningInteraction",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-25T14:00:00Z"
+            },
+            "interaction_type": {
+              "type": "Enum",
+              "value": "WATCH_VIDEO"
+            },
+            "duration": {
+              "type": "Duration",
+              "value": 1200,
+              "unit": "seconds"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "ASM-2026-QUIZ1",
+          "type": "Assessment",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-26T10:00:00Z"
+            },
+            "actual_score": {
+              "type": "Float",
+              "value": 88.5,
+              "unit": "%"
+            }
+          },
+          "beliefs": {
+            "predicted_score_dist": {
+              "type": "Normal",
+              "params": {
+                "mean_score": 82.0,
+                "std_dev": 5.5
+              },
+              "unit": "%",
+              "confidence": 0.85
+            }
+          },
+          "is_observation": true
+        }
+      ],
+      "edges": [
+        {
+          "from": "MST-LRN001-MATH",
+          "to": "LRN-001",
+          "type": "belongs_to",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "LRN-001",
+          "to": "INT-ED-2026-001",
+          "type": "initiated",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-ED-2026-001",
+          "to": "RES-VID-101",
+          "type": "uses_resource",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "RES-VID-101",
+          "to": "KC-MATH-101",
+          "type": "teaches_concept",
+          "weight": 0.9,
+          "prior": "learned"
+        },
+        {
+          "from": "RES-SIM-102",
+          "to": "KC-MATH-102",
+          "type": "teaches_concept",
+          "weight": 0.85,
+          "prior": "learned"
+        },
+        {
+          "from": "KC-MATH-101",
+          "to": "KC-MATH-102",
+          "type": "prerequisite_for",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASM-2026-QUIZ1",
+          "to": "KC-MATH-101",
+          "type": "assesses_concept",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASM-2026-QUIZ1",
+          "to": "LRN-001",
+          "type": "evaluates_learner",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASM-2026-QUIZ1",
+          "to": "MST-LRN001-MATH",
+          "type": "updates_mastery",
+          "weight": 0.88,
+          "prior": "learned"
+        }
+      ]
+    },
+    "finance": {
+      "schema_ref": "finance/Finance_Sector_Schema.md",
+      "generated_by": "MiNYAMA schema hardener",
+      "description": "Machine-readable graph representation of the Finance sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+      "meta": {
+        "representation": "graph",
+        "node_types": [
+          "EconomicAgent",
+          "Asset",
+          "Transaction",
+          "Market"
+        ],
+        "edge_type_enum": [
+          "holds_asset",
+          "issued_by",
+          "executes_transaction",
+          "trades_in_market",
+          "influences_valuation",
+          "settles_via"
+        ],
+        "belief_attr_suffix": [
+          "_model",
+          "_dist",
+          "_ref"
+        ],
+        "units_default": "usd"
+      },
+      "nodes": [
+        {
+          "id": "AGT-CB-001",
+          "type": "EconomicAgent",
+          "attributes": {
+            "agent_type": {
+              "type": "Enum",
+              "value": "CENTRAL_BANK"
+            },
+            "jurisdiction": {
+              "type": "String",
+              "value": "Global-US"
+            },
+            "capital_reserves": {
+              "type": "Float",
+              "value": 4200000000000.0,
+              "unit": "USD"
+            }
+          },
+          "beliefs": {
+            "risk_profile": {
+              "type": "Normal",
+              "params": {
+                "mean_risk_tolerance": 0.05,
+                "std_dev": 0.01
+              },
+              "confidence": 0.98
+            },
+            "liquidity_preference": {
+              "type": "Normal",
+              "params": {
+                "mean_ratio": 0.95,
+                "std_dev": 0.02
+              },
+              "confidence": 0.95
+            }
+          }
+        },
+        {
+          "id": "AGT-INV-101",
+          "type": "EconomicAgent",
+          "attributes": {
+            "agent_type": {
+              "type": "Enum",
+              "value": "INVESTOR"
+            },
+            "institution_name": {
+              "type": "String",
+              "value": "Alpha Capital Management"
+            },
+            "capital_reserves": {
+              "type": "Float",
+              "value": 1500000000.0,
+              "unit": "USD"
+            }
+          },
+          "beliefs": {
+            "risk_profile": {
+              "type": "Normal",
+              "params": {
+                "mean_risk_tolerance": 0.45,
+                "std_dev": 0.1
+              },
+              "confidence": 0.85
+            },
+            "liquidity_preference": {
+              "type": "Normal",
+              "params": {
+                "mean_ratio": 0.25,
+                "std_dev": 0.05
+              },
+              "confidence": 0.82
+            }
+          }
+        },
+        {
+          "id": "AST-EQ-AAPL",
+          "type": "Asset",
+          "attributes": {
+            "asset_class": {
+              "type": "Enum",
+              "value": "EQUITY"
+            },
+            "ticker": {
+              "type": "String",
+              "value": "AAPL"
+            },
+            "liquidity_depth": {
+              "type": "Float",
+              "value": 85000000.0,
+              "unit": "USD/day"
+            }
+          },
+          "beliefs": {
+            "valuation_model": {
+              "type": "Normal",
+              "params": {
+                "mean_price": 235.5,
+                "std_dev": 12.4
+              },
+              "unit": "USD",
+              "confidence": 0.89
+            },
+            "volatility_model": {
+              "type": "Normal",
+              "params": {
+                "annualized_vol": 0.18,
+                "std_dev": 0.03
+              },
+              "confidence": 0.91
+            }
+          }
+        },
+        {
+          "id": "AST-BOND-US10Y",
+          "type": "Asset",
+          "attributes": {
+            "asset_class": {
+              "type": "Enum",
+              "value": "FIXED_INCOME"
+            },
+            "cusip": {
+              "type": "String",
+              "value": "912828YS0"
+            },
+            "coupon_rate": {
+              "type": "Float",
+              "value": 4.25,
+              "unit": "%"
+            }
+          },
+          "beliefs": {
+            "valuation_model": {
+              "type": "Normal",
+              "params": {
+                "mean_price": 98.4,
+                "std_dev": 1.8
+              },
+              "unit": "USD",
+              "confidence": 0.94
+            },
+            "volatility_model": {
+              "type": "Normal",
+              "params": {
+                "annualized_vol": 0.07,
+                "std_dev": 0.01
+              },
+              "confidence": 0.95
+            }
+          }
+        },
+        {
+          "id": "MKT-NASDAQ",
+          "type": "Market",
+          "attributes": {
+            "market_type": {
+              "type": "Enum",
+              "value": "EXCHANGE"
+            },
+            "trading_hours": {
+              "type": "String",
+              "value": "09:30-16:00 EST"
+            }
+          }
+        },
+        {
+          "id": "TXN-FIN-2026-001",
+          "type": "Transaction",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-28T14:15:00Z"
+            },
+            "price": {
+              "type": "Float",
+              "value": 236.1,
+              "unit": "USD"
+            },
+            "quantity": {
+              "type": "Int",
+              "value": 5000
+            },
+            "settlement_status": {
+              "type": "Enum",
+              "value": "COMPLETED"
+            }
+          },
+          "is_observation": true
+        }
+      ],
+      "edges": [
+        {
+          "from": "AGT-INV-101",
+          "to": "AST-EQ-AAPL",
+          "type": "holds_asset",
+          "weight": 0.85,
+          "prior": "learned"
+        },
+        {
+          "from": "AGT-CB-001",
+          "to": "AST-BOND-US10Y",
+          "type": "holds_asset",
+          "weight": 0.95,
+          "prior": "learned"
+        },
+        {
+          "from": "TXN-FIN-2026-001",
+          "to": "AGT-INV-101",
+          "type": "executes_transaction",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "TXN-FIN-2026-001",
+          "to": "AST-EQ-AAPL",
+          "type": "trades_in_market",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "TXN-FIN-2026-001",
+          "to": "MKT-NASDAQ",
+          "type": "settles_via",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "AGT-CB-001",
+          "to": "AST-EQ-AAPL",
+          "type": "influences_valuation",
+          "weight": 0.45,
+          "prior": "learned"
+        }
+      ]
+    },
+    "healthcare": {
+      "schema_ref": "healthcare/Healthcare_Sector_Schema.md",
+      "generated_by": "MiNYAMA schema hardener",
+      "description": "Machine-readable graph representation of the Healthcare sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+      "meta": {
+        "representation": "graph",
+        "node_types": [
+          "Patient",
+          "Provider",
+          "Encounter",
+          "Intervention",
+          "HealthState"
+        ],
+        "edge_type_enum": [
+          "has_health_state",
+          "conducts_encounter",
+          "participates_in",
+          "administers_intervention",
+          "alters_health_state",
+          "prescribes"
+        ],
+        "belief_attr_suffix": [
+          "_model",
+          "_dist",
+          "_ref"
+        ],
+        "units_default": "si"
+      },
+      "nodes": [
+        {
+          "id": "PAT-001",
+          "type": "Patient",
+          "attributes": {
+            "demographics": {
+              "type": "Object",
+              "value": {
+                "age": 58,
+                "sex": "M",
+                "risk_cohort": "CARDIOMETABOLIC"
+              }
+            },
+            "registered_at": {
+              "type": "DateTime",
+              "value": "2024-03-10T10:00:00Z"
+            }
+          },
+          "beliefs": {
+            "care_plan_adherence": {
+              "type": "Normal",
+              "params": {
+                "mean_adherence": 0.85,
+                "std_dev": 0.07
+              },
+              "confidence": 0.88
+            }
+          }
+        },
+        {
+          "id": "PRV-HOSP-01",
+          "type": "Provider",
+          "attributes": {
+            "provider_type": {
+              "type": "Enum",
+              "value": "HOSPITAL"
+            },
+            "specialization": {
+              "type": "Array",
+              "value": [
+                "Cardiology",
+                "Endocrinology"
+              ]
+            },
+            "facility_name": {
+              "type": "String",
+              "value": "Central Metropolitan Medical Center"
+            }
+          },
+          "beliefs": {
+            "resource_capacity": {
+              "type": "Normal",
+              "params": {
+                "bed_occupancy_percent": 78.5,
+                "std_dev": 5.2
+              },
+              "confidence": 0.94
+            },
+            "treatment_efficacy_model": {
+              "type": "Normal",
+              "params": {
+                "success_rate": 0.91,
+                "std_dev": 0.03
+              },
+              "confidence": 0.92
+            }
+          }
+        },
+        {
+          "id": "HST-PAT001-2026",
+          "type": "HealthState",
+          "attributes": {
+            "diagnoses": {
+              "type": "Array",
+              "value": [
+                "E11.9 (Type 2 Diabetes)",
+                "I10 (Essential Hypertension)"
+              ]
+            },
+            "quality_of_life": {
+              "type": "Float",
+              "value": 0.78,
+              "unit": "index"
+            }
+          },
+          "beliefs": {
+            "vital_signs": {
+              "type": "MultivariateNormal",
+              "params": {
+                "means": {
+                  "systolic_bp": 132.0,
+                  "diastolic_bp": 84.0,
+                  "hba1c": 6.8,
+                  "heart_rate": 72.0
+                }
+              },
+              "covariance_scale": 0.05,
+              "confidence": 0.89
+            },
+            "prognosis_model": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "STABLE": 0.82,
+                  "DETERIORATING": 0.12,
+                  "CRITICAL": 0.02,
+                  "IMPROVING": 0.04
+                }
+              },
+              "confidence": 0.85
+            }
+          }
+        },
+        {
+          "id": "INT-MED-METFORMIN",
+          "type": "Intervention",
+          "attributes": {
+            "intervention_type": {
+              "type": "Enum",
+              "value": "MEDICATION"
+            },
+            "drug_name": {
+              "type": "String",
+              "value": "Metformin Extended-Release"
+            },
+            "dosage": {
+              "type": "String",
+              "value": "1000mg daily"
+            }
+          },
+          "beliefs": {
+            "expected_efficacy_model": {
+              "type": "Normal",
+              "params": {
+                "hba1c_reduction": 1.2,
+                "std_dev": 0.2
+              },
+              "unit": "%",
+              "confidence": 0.93
+            }
+          }
+        },
+        {
+          "id": "ENC-HC-2026-001",
+          "type": "Encounter",
+          "attributes": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-20T11:30:00Z"
+            },
+            "encounter_type": {
+              "type": "Enum",
+              "value": "CONSULTATION"
+            },
+            "outcome_assessment": {
+              "type": "String",
+              "value": "Glycemic control improving; continue current regimen."
+            }
+          },
+          "is_observation": true
+        }
+      ],
+      "edges": [
+        {
+          "from": "PAT-001",
+          "to": "HST-PAT001-2026",
+          "type": "has_health_state",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "PRV-HOSP-01",
+          "to": "ENC-HC-2026-001",
+          "type": "conducts_encounter",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "PAT-001",
+          "to": "ENC-HC-2026-001",
+          "type": "participates_in",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ENC-HC-2026-001",
+          "to": "INT-MED-METFORMIN",
+          "type": "prescribes",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-MED-METFORMIN",
+          "to": "HST-PAT001-2026",
+          "type": "alters_health_state",
+          "weight": 0.88,
+          "prior": "learned"
+        },
+        {
+          "from": "PRV-HOSP-01",
+          "to": "INT-MED-METFORMIN",
+          "type": "administers_intervention",
+          "weight": 0.95,
+          "prior": "learned"
+        }
+      ]
+    },
+    "manufacturing": {
+      "schema_ref": "manufacturing/Manufacturing_Sector_Schema.md",
+      "generated_by": "MiNYAMA schema hardener",
+      "description": "Machine-readable graph representation of the Manufacturing sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+      "meta": {
+        "representation": "graph",
+        "node_types": [
+          "PhysicalAsset",
+          "Material",
+          "WorkOrder",
+          "Process",
+          "SupplyChainLink"
+        ],
+        "edge_type_enum": [
+          "feeds_material",
+          "executes_process",
+          "assigned_to_order",
+          "supplies_material",
+          "transforms_material",
+          "produces_material",
+          "monitors_quality"
+        ],
+        "belief_attr_suffix": [
+          "_model",
+          "_dist",
+          "_ref"
+        ],
+        "units_default": "si"
+      },
+      "nodes": [
+        {
+          "id": "ASS-CNC-001",
+          "type": "PhysicalAsset",
+          "attributes": {
+            "asset_type": {
+              "type": "Enum",
+              "value": "CNC_MACHINE"
+            },
+            "manufacturer": {
+              "type": "String",
+              "value": "Haas VF-2"
+            },
+            "throughput_capacity": {
+              "type": "Float",
+              "value": 24.0,
+              "unit": "units/hour"
+            },
+            "telemetry_feed": {
+              "type": "TimeSeries",
+              "value": {
+                "temperature_c": 68.2,
+                "vibration_rms": 0.42,
+                "error_codes": []
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "RUNNING": 0.88,
+                  "IDLE": 0.07,
+                  "MAINTENANCE": 0.04,
+                  "FAILED": 0.01
+                }
+              },
+              "confidence": 0.94
+            },
+            "maintenance_model": {
+              "type": "Normal",
+              "params": {
+                "mean_days_to_maintenance": 14.0,
+                "std_dev": 3.2
+              },
+              "unit": "days",
+              "confidence": 0.87
+            }
+          }
+        },
+        {
+          "id": "ASS-ROB-002",
+          "type": "PhysicalAsset",
+          "attributes": {
+            "asset_type": {
+              "type": "Enum",
+              "value": "ROBOTIC_ARM"
+            },
+            "manufacturer": {
+              "type": "String",
+              "value": "KUKA KR 10"
+            },
+            "throughput_capacity": {
+              "type": "Float",
+              "value": 30.0,
+              "unit": "units/hour"
+            },
+            "telemetry_feed": {
+              "type": "TimeSeries",
+              "value": {
+                "torque_nm": 45.1,
+                "cycle_time_s": 4.8,
+                "error_codes": []
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "RUNNING": 0.92,
+                  "IDLE": 0.04,
+                  "MAINTENANCE": 0.03,
+                  "FAILED": 0.01
+                }
+              },
+              "confidence": 0.96
+            },
+            "maintenance_model": {
+              "type": "Normal",
+              "params": {
+                "mean_days_to_maintenance": 21.0,
+                "std_dev": 4.5
+              },
+              "unit": "days",
+              "confidence": 0.84
+            }
+          }
+        },
+        {
+          "id": "ASS-CVY-003",
+          "type": "PhysicalAsset",
+          "attributes": {
+            "asset_type": {
+              "type": "Enum",
+              "value": "CONVEYOR_BELT"
+            },
+            "manufacturer": {
+              "type": "String",
+              "value": "Hytrol EZLogic"
+            },
+            "throughput_capacity": {
+              "type": "Float",
+              "value": 60.0,
+              "unit": "units/hour"
+            },
+            "telemetry_feed": {
+              "type": "TimeSeries",
+              "value": {
+                "speed_mps": 1.2,
+                "load_kg": 85.0,
+                "error_codes": []
+              }
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "RUNNING": 0.95,
+                  "IDLE": 0.03,
+                  "MAINTENANCE": 0.015,
+                  "FAILED": 0.005
+                }
+              },
+              "confidence": 0.97
+            },
+            "maintenance_model": {
+              "type": "Normal",
+              "params": {
+                "mean_days_to_maintenance": 30.0,
+                "std_dev": 6.0
+              },
+              "unit": "days",
+              "confidence": 0.8
+            }
+          }
+        },
+        {
+          "id": "MAT-RAW-AL-6061",
+          "type": "Material",
+          "attributes": {
+            "material_type": {
+              "type": "Enum",
+              "value": "RAW"
+            },
+            "specifications": {
+              "type": "Object",
+              "value": {
+                "alloy": "Aluminum 6061-T6",
+                "tensile_strength_mpa": 310,
+                "density_gcc": 2.7
+              }
+            },
+            "quantity": {
+              "type": "Float",
+              "value": 12500.0,
+              "unit": "kg"
+            },
+            "location": {
+              "type": "String",
+              "value": "WAREHOUSE_A"
+            },
+            "quality_status": {
+              "type": "Enum",
+              "value": "PASSED"
+            }
+          }
+        },
+        {
+          "id": "MAT-WIP-BRACKET-01",
+          "type": "Material",
+          "attributes": {
+            "material_type": {
+              "type": "Enum",
+              "value": "WORK_IN_PROGRESS"
+            },
+            "specifications": {
+              "type": "Object",
+              "value": {
+                "part_number": "BRK-2026-A",
+                "dimensions_mm": "120x80x15"
+              }
+            },
+            "quantity": {
+              "type": "Float",
+              "value": 340.0,
+              "unit": "pieces"
+            },
+            "location": {
+              "type": "String",
+              "value": "PRODUCTION_LINE_1"
+            },
+            "quality_status": {
+              "type": "Enum",
+              "value": "UNTESTED"
+            }
+          }
+        },
+        {
+          "id": "MAT-FIN-BRACKET-01",
+          "type": "Material",
+          "attributes": {
+            "material_type": {
+              "type": "Enum",
+              "value": "FINISHED_GOOD"
+            },
+            "specifications": {
+              "type": "Object",
+              "value": {
+                "part_number": "BRK-2026-A-FIN",
+                "tolerance_mm": 0.05
+              }
+            },
+            "quantity": {
+              "type": "Float",
+              "value": 0.0,
+              "unit": "pieces"
+            },
+            "location": {
+              "type": "String",
+              "value": "SHIPPING_DOCK"
+            },
+            "quality_status": {
+              "type": "Enum",
+              "value": "PASSED"
+            }
+          }
+        },
+        {
+          "id": "PRC-ASSEMBLE-BRACKET",
+          "type": "Process",
+          "attributes": {
+            "process_name": {
+              "type": "String",
+              "value": "Bracket CNC Machining and Assembly"
+            },
+            "steps": {
+              "type": "Array",
+              "value": [
+                {
+                  "step": 1,
+                  "operation": "CNC milling",
+                  "asset_type": "CNC_MACHINE",
+                  "duration_min": 12
+                },
+                {
+                  "step": 2,
+                  "operation": "Robotic deburring",
+                  "asset_type": "ROBOTIC_ARM",
+                  "duration_min": 3
+                },
+                {
+                  "step": 3,
+                  "operation": "Conveyor to QC",
+                  "asset_type": "CONVEYOR_BELT",
+                  "duration_min": 1
+                },
+                {
+                  "step": 4,
+                  "operation": "Quality inspection",
+                  "asset_type": "INSPECTION_CAMERA",
+                  "duration_min": 2
+                }
+              ]
+            },
+            "quality_checkpoints": {
+              "type": "Array",
+              "value": [
+                "step_1_dimensional_check",
+                "step_4_surface_finish"
+              ]
+            }
+          }
+        },
+        {
+          "id": "SCL-SUPPLIER-AL-01",
+          "type": "SupplyChainLink",
+          "attributes": {
+            "supplier_id": {
+              "type": "String",
+              "value": "ALUMINUMWORLD-INC"
+            },
+            "cost_per_unit": {
+              "type": "Float",
+              "value": 3.2,
+              "unit": "USD/kg"
+            }
+          },
+          "beliefs": {
+            "lead_time_model": {
+              "type": "Normal",
+              "params": {
+                "mean_days": 7.0,
+                "std_dev": 1.8
+              },
+              "unit": "days",
+              "confidence": 0.86
+            },
+            "reliability_score": {
+              "type": "Normal",
+              "params": {
+                "mean_reliability": 0.93,
+                "std_dev": 0.03
+              },
+              "confidence": 0.9
+            }
+          }
+        },
+        {
+          "id": "WO-2026-001",
+          "type": "WorkOrder",
+          "attributes": {
+            "quantity_required": {
+              "type": "Int",
+              "value": 500
+            },
+            "status": {
+              "type": "Enum",
+              "value": "IN_PROGRESS"
+            },
+            "expected_duration": {
+              "type": "Duration",
+              "value": 10800,
+              "unit": "seconds"
+            },
+            "actual_duration": {
+              "type": "Duration",
+              "value": null
+            }
+          },
+          "beliefs": {
+            "predicted_duration": {
+              "type": "Normal",
+              "params": {
+                "mean_seconds": 10800,
+                "std_dev": 900
+              },
+              "confidence": 0.82
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "QC-2026-001",
+          "type": "PhysicalAsset",
+          "attributes": {
+            "asset_type": {
+              "type": "Enum",
+              "value": "INSPECTION_CAMERA"
+            },
+            "manufacturer": {
+              "type": "String",
+              "value": "Keyence XG-X8000"
+            }
+          },
+          "beliefs": {
+            "operational_state": {
+              "type": "Categorical",
+              "params": {
+                "probs": {
+                  "RUNNING": 0.97,
+                  "IDLE": 0.02,
+                  "MAINTENANCE": 0.005,
+                  "FAILED": 0.005
+                }
+              },
+              "confidence": 0.98
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "SCL-SUPPLIER-AL-01",
+          "to": "MAT-RAW-AL-6061",
+          "type": "supplies_material",
+          "weight": 0.93,
+          "prior": "learned"
+        },
+        {
+          "from": "WO-2026-001",
+          "to": "MAT-RAW-AL-6061",
+          "type": "feeds_material",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "WO-2026-001",
+          "to": "PRC-ASSEMBLE-BRACKET",
+          "type": "executes_process",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASS-CNC-001",
+          "to": "WO-2026-001",
+          "type": "assigned_to_order",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASS-ROB-002",
+          "to": "WO-2026-001",
+          "type": "assigned_to_order",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASS-CVY-003",
+          "to": "WO-2026-001",
+          "type": "assigned_to_order",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "ASS-CNC-001",
+          "to": "MAT-WIP-BRACKET-01",
+          "type": "transforms_material",
+          "weight": 0.88,
+          "prior": "learned"
+        },
+        {
+          "from": "MAT-WIP-BRACKET-01",
+          "to": "MAT-FIN-BRACKET-01",
+          "type": "produces_material",
+          "weight": 0.82,
+          "prior": "learned"
+        },
+        {
+          "from": "QC-2026-001",
+          "to": "MAT-FIN-BRACKET-01",
+          "type": "monitors_quality",
+          "weight": 0.97,
+          "prior": "deterministic"
+        }
+      ]
+    },
+    "retail": {
+      "schema_ref": "retail/Retail_Sector_Schema.md",
+      "generated_by": "MiNYAMA schema hardener",
+      "description": "Machine-readable graph representation of the Retail sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+      "meta": {
+        "representation": "graph",
+        "node_types": [
+          "Customer",
+          "Product",
+          "InventoryItem",
+          "CustomerInteraction",
+          "Transaction",
+          "DemandForecast"
+        ],
+        "edge_type_enum": [
+          "purchases",
+          "adds_to_cart",
+          "views_product",
+          "stocks_item",
+          "stocks_product",
+          "predicts_demand",
+          "fulfills_transaction"
+        ],
+        "belief_attr_suffix": [
+          "_model",
+          "_dist",
+          "_ref"
+        ],
+        "units_default": "usd"
+      },
+      "nodes": [
+        {
+          "id": "CUST-001",
+          "type": "Customer",
+          "attributes": {
+            "demographics": {
+              "type": "Object",
+              "value": {
+                "age": 34,
+                "segment": "PROFESSIONAL",
+                "location": "URBAN"
+              }
+            },
+            "loyalty_status": {
+              "type": "Enum",
+              "value": "ACTIVE"
+            }
+          },
+          "beliefs": {
+            "propensity_to_buy_model": {
+              "type": "Normal",
+              "params": {
+                "mean_propensity": 0.72,
+                "std_dev": 0.1
+              },
+              "confidence": 0.84
+            }
+          }
+        },
+        {
+          "id": "CUST-002",
+          "type": "Customer",
+          "attributes": {
+            "demographics": {
+              "type": "Object",
+              "value": {
+                "age": 22,
+                "segment": "STUDENT",
+                "location": "SUBURBAN"
+              }
+            },
+            "loyalty_status": {
+              "type": "Enum",
+              "value": "CHURN_RISK"
+            }
+          },
+          "beliefs": {
+            "propensity_to_buy_model": {
+              "type": "Normal",
+              "params": {
+                "mean_propensity": 0.35,
+                "std_dev": 0.15
+              },
+              "confidence": 0.72
+            }
+          }
+        },
+        {
+          "id": "PRD-WIRELESS-HEADSET",
+          "type": "Product",
+          "attributes": {
+            "product_id": {
+              "type": "String",
+              "value": "SKU-WHS-2026"
+            },
+            "description": {
+              "type": "String",
+              "value": "ProAudio Wireless Noise-Cancelling Headset"
+            },
+            "category": {
+              "type": "String",
+              "value": "Electronics"
+            },
+            "price": {
+              "type": "Float",
+              "value": 249.99,
+              "unit": "USD"
+            },
+            "cost_of_goods_sold": {
+              "type": "Float",
+              "value": 82.5,
+              "unit": "USD"
+            },
+            "supplier_id": {
+              "type": "String",
+              "value": "SUP-PROAUDIO-01"
+            }
+          }
+        },
+        {
+          "id": "PRD-ERGO-CHAIR",
+          "type": "Product",
+          "attributes": {
+            "product_id": {
+              "type": "String",
+              "value": "SKU-ERC-2026"
+            },
+            "description": {
+              "type": "String",
+              "value": "ErgonomicMesh Office Chair"
+            },
+            "category": {
+              "type": "String",
+              "value": "Furniture"
+            },
+            "price": {
+              "type": "Float",
+              "value": 449.99,
+              "unit": "USD"
+            },
+            "cost_of_goods_sold": {
+              "type": "Float",
+              "value": 185.0,
+              "unit": "USD"
+            },
+            "supplier_id": {
+              "type": "String",
+              "value": "SUP-FURNWORLD-01"
+            }
+          }
+        },
+        {
+          "id": "INV-WHS-WH-001",
+          "type": "InventoryItem",
+          "attributes": {
+            "location_id": {
+              "type": "String",
+              "value": "WAREHOUSE_EAST"
+            },
+            "quantity": {
+              "type": "Int",
+              "value": 245
+            },
+            "status": {
+              "type": "Enum",
+              "value": "AVAILABLE"
+            }
+          }
+        },
+        {
+          "id": "INV-WHS-CH-001",
+          "type": "InventoryItem",
+          "attributes": {
+            "location_id": {
+              "type": "String",
+              "value": "WAREHOUSE_EAST"
+            },
+            "quantity": {
+              "type": "Int",
+              "value": 38
+            },
+            "status": {
+              "type": "Enum",
+              "value": "AVAILABLE"
+            }
+          }
+        },
+        {
+          "id": "INV-STORE5-WH-001",
+          "type": "InventoryItem",
+          "attributes": {
+            "location_id": {
+              "type": "String",
+              "value": "STORE_5"
+            },
+            "quantity": {
+              "type": "Int",
+              "value": 12
+            },
+            "status": {
+              "type": "Enum",
+              "value": "AVAILABLE"
+            }
+          }
+        },
+        {
+          "id": "INT-RETAIL-2026-001",
+          "type": "CustomerInteraction",
+          "attributes": {
+            "channel": {
+              "type": "Enum",
+              "value": "ONLINE"
+            },
+            "interaction_type": {
+              "type": "Enum",
+              "value": "ADD_TO_CART"
+            },
+            "outcome": {
+              "type": "Enum",
+              "value": "PURCHASE"
+            },
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-28T16:45:00Z"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "INT-RETAIL-2026-002",
+          "type": "CustomerInteraction",
+          "attributes": {
+            "channel": {
+              "type": "Enum",
+              "value": "MOBILE_APP"
+            },
+            "interaction_type": {
+              "type": "Enum",
+              "value": "PAGE_VIEW"
+            },
+            "outcome": {
+              "type": "Enum",
+              "value": "CART_ABANDONMENT"
+            },
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-28T18:10:00Z"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "TXN-RETAIL-2026-001",
+          "type": "Transaction",
+          "attributes": {
+            "total_price": {
+              "type": "Float",
+              "value": 249.99,
+              "unit": "USD"
+            },
+            "channel": {
+              "type": "Enum",
+              "value": "ONLINE"
+            },
+            "items_purchased": {
+              "type": "Array",
+              "value": [
+                {
+                  "product_id": "SKU-WHS-2026",
+                  "qty": 1
+                }
+              ]
+            },
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2026-08-28T16:52:00Z"
+            }
+          },
+          "is_observation": true
+        },
+        {
+          "id": "DF-WHS-WEEK36",
+          "type": "DemandForecast",
+          "attributes": {
+            "time_horizon": {
+              "type": "String",
+              "value": "2026-W36 (Sep 01-07)"
+            },
+            "seasonality_model": {
+              "type": "String",
+              "value": "back_to_school_peak"
+            }
+          },
+          "beliefs": {
+            "predicted_sales_distribution": {
+              "type": "Normal",
+              "params": {
+                "mean_units": 82.0,
+                "std_dev": 12.5
+              },
+              "unit": "units/week",
+              "confidence": 0.83
+            },
+            "promotional_lift_model": {
+              "type": "Normal",
+              "params": {
+                "mean_lift_percent": 25.0,
+                "std_dev": 6.0
+              },
+              "confidence": 0.74
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "INV-WHS-WH-001",
+          "to": "PRD-WIRELESS-HEADSET",
+          "type": "stocks_product",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INV-WHS-CH-001",
+          "to": "PRD-ERGO-CHAIR",
+          "type": "stocks_product",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INV-STORE5-WH-001",
+          "to": "PRD-WIRELESS-HEADSET",
+          "type": "stocks_product",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "CUST-001",
+          "to": "INT-RETAIL-2026-001",
+          "type": "adds_to_cart",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "CUST-002",
+          "to": "INT-RETAIL-2026-002",
+          "type": "views_product",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "INT-RETAIL-2026-001",
+          "to": "TXN-RETAIL-2026-001",
+          "type": "fulfills_transaction",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "TXN-RETAIL-2026-001",
+          "to": "PRD-WIRELESS-HEADSET",
+          "type": "purchases",
+          "weight": 1.0,
+          "prior": "deterministic"
+        },
+        {
+          "from": "TXN-RETAIL-2026-001",
+          "to": "INV-WHS-WH-001",
+          "type": "stocks_item",
+          "weight": 0.95,
+          "prior": "learned"
+        },
+        {
+          "from": "DF-WHS-WEEK36",
+          "to": "PRD-WIRELESS-HEADSET",
+          "type": "predicts_demand",
+          "weight": 0.83,
+          "prior": "learned"
+        }
+      ]
+    }
+  }
+}

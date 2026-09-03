@@ -1,0 +1,195 @@
+{
+  "schema_ref": "manufacturing/Manufacturing_Sector_Schema.md",
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Machine-readable graph representation of the Manufacturing sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+  "meta": {
+    "representation": "graph",
+    "node_types": ["PhysicalAsset", "Material", "WorkOrder", "Process", "SupplyChainLink"],
+    "edge_type_enum": ["feeds_material", "executes_process", "assigned_to_order", "supplies_material", "transforms_material", "produces_material", "monitors_quality"],
+    "belief_attr_suffix": ["_model", "_dist", "_ref"],
+    "units_default": "si"
+  },
+  "nodes": [
+    {
+      "id": "ASS-CNC-001",
+      "type": "PhysicalAsset",
+      "attributes": {
+        "asset_type": {"type": "Enum", "value": "CNC_MACHINE"},
+        "manufacturer": {"type": "String", "value": "Haas VF-2"},
+        "throughput_capacity": {"type": "Float", "value": 24.0, "unit": "units/hour"},
+        "telemetry_feed": {"type": "TimeSeries", "value": {"temperature_c": 68.2, "vibration_rms": 0.42, "error_codes": []}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"RUNNING": 0.88, "IDLE": 0.07, "MAINTENANCE": 0.04, "FAILED": 0.01}},
+          "confidence": 0.94
+        },
+        "maintenance_model": {
+          "type": "Normal",
+          "params": {"mean_days_to_maintenance": 14.0, "std_dev": 3.2},
+          "unit": "days",
+          "confidence": 0.87
+        }
+      }
+    },
+    {
+      "id": "ASS-ROB-002",
+      "type": "PhysicalAsset",
+      "attributes": {
+        "asset_type": {"type": "Enum", "value": "ROBOTIC_ARM"},
+        "manufacturer": {"type": "String", "value": "KUKA KR 10"},
+        "throughput_capacity": {"type": "Float", "value": 30.0, "unit": "units/hour"},
+        "telemetry_feed": {"type": "TimeSeries", "value": {"torque_nm": 45.1, "cycle_time_s": 4.8, "error_codes": []}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"RUNNING": 0.92, "IDLE": 0.04, "MAINTENANCE": 0.03, "FAILED": 0.01}},
+          "confidence": 0.96
+        },
+        "maintenance_model": {
+          "type": "Normal",
+          "params": {"mean_days_to_maintenance": 21.0, "std_dev": 4.5},
+          "unit": "days",
+          "confidence": 0.84
+        }
+      }
+    },
+    {
+      "id": "ASS-CVY-003",
+      "type": "PhysicalAsset",
+      "attributes": {
+        "asset_type": {"type": "Enum", "value": "CONVEYOR_BELT"},
+        "manufacturer": {"type": "String", "value": "Hytrol EZLogic"},
+        "throughput_capacity": {"type": "Float", "value": 60.0, "unit": "units/hour"},
+        "telemetry_feed": {"type": "TimeSeries", "value": {"speed_mps": 1.2, "load_kg": 85.0, "error_codes": []}}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"RUNNING": 0.95, "IDLE": 0.03, "MAINTENANCE": 0.015, "FAILED": 0.005}},
+          "confidence": 0.97
+        },
+        "maintenance_model": {
+          "type": "Normal",
+          "params": {"mean_days_to_maintenance": 30.0, "std_dev": 6.0},
+          "unit": "days",
+          "confidence": 0.80
+        }
+      }
+    },
+    {
+      "id": "MAT-RAW-AL-6061",
+      "type": "Material",
+      "attributes": {
+        "material_type": {"type": "Enum", "value": "RAW"},
+        "specifications": {"type": "Object", "value": {"alloy": "Aluminum 6061-T6", "tensile_strength_mpa": 310, "density_gcc": 2.70}},
+        "quantity": {"type": "Float", "value": 12500.0, "unit": "kg"},
+        "location": {"type": "String", "value": "WAREHOUSE_A"},
+        "quality_status": {"type": "Enum", "value": "PASSED"}
+      }
+    },
+    {
+      "id": "MAT-WIP-BRACKET-01",
+      "type": "Material",
+      "attributes": {
+        "material_type": {"type": "Enum", "value": "WORK_IN_PROGRESS"},
+        "specifications": {"type": "Object", "value": {"part_number": "BRK-2026-A", "dimensions_mm": "120x80x15"}},
+        "quantity": {"type": "Float", "value": 340.0, "unit": "pieces"},
+        "location": {"type": "String", "value": "PRODUCTION_LINE_1"},
+        "quality_status": {"type": "Enum", "value": "UNTESTED"}
+      }
+    },
+    {
+      "id": "MAT-FIN-BRACKET-01",
+      "type": "Material",
+      "attributes": {
+        "material_type": {"type": "Enum", "value": "FINISHED_GOOD"},
+        "specifications": {"type": "Object", "value": {"part_number": "BRK-2026-A-FIN", "tolerance_mm": 0.05}},
+        "quantity": {"type": "Float", "value": 0.0, "unit": "pieces"},
+        "location": {"type": "String", "value": "SHIPPING_DOCK"},
+        "quality_status": {"type": "Enum", "value": "PASSED"}
+      }
+    },
+    {
+      "id": "PRC-ASSEMBLE-BRACKET",
+      "type": "Process",
+      "attributes": {
+        "process_name": {"type": "String", "value": "Bracket CNC Machining and Assembly"},
+        "steps": {"type": "Array", "value": [
+          {"step": 1, "operation": "CNC milling", "asset_type": "CNC_MACHINE", "duration_min": 12},
+          {"step": 2, "operation": "Robotic deburring", "asset_type": "ROBOTIC_ARM", "duration_min": 3},
+          {"step": 3, "operation": "Conveyor to QC", "asset_type": "CONVEYOR_BELT", "duration_min": 1},
+          {"step": 4, "operation": "Quality inspection", "asset_type": "INSPECTION_CAMERA", "duration_min": 2}
+        ]},
+        "quality_checkpoints": {"type": "Array", "value": ["step_1_dimensional_check", "step_4_surface_finish"]}
+      }
+    },
+    {
+      "id": "SCL-SUPPLIER-AL-01",
+      "type": "SupplyChainLink",
+      "attributes": {
+        "supplier_id": {"type": "String", "value": "ALUMINUMWORLD-INC"},
+        "cost_per_unit": {"type": "Float", "value": 3.20, "unit": "USD/kg"}
+      },
+      "beliefs": {
+        "lead_time_model": {
+          "type": "Normal",
+          "params": {"mean_days": 7.0, "std_dev": 1.8},
+          "unit": "days",
+          "confidence": 0.86
+        },
+        "reliability_score": {
+          "type": "Normal",
+          "params": {"mean_reliability": 0.93, "std_dev": 0.03},
+          "confidence": 0.90
+        }
+      }
+    },
+    {
+      "id": "WO-2026-001",
+      "type": "WorkOrder",
+      "attributes": {
+        "quantity_required": {"type": "Int", "value": 500},
+        "status": {"type": "Enum", "value": "IN_PROGRESS"},
+        "expected_duration": {"type": "Duration", "value": 10800, "unit": "seconds"},
+        "actual_duration": {"type": "Duration", "value": null}
+      },
+      "beliefs": {
+        "predicted_duration": {
+          "type": "Normal",
+          "params": {"mean_seconds": 10800, "std_dev": 900},
+          "confidence": 0.82
+        }
+      },
+      "is_observation": true
+    },
+    {
+      "id": "QC-2026-001",
+      "type": "PhysicalAsset",
+      "attributes": {
+        "asset_type": {"type": "Enum", "value": "INSPECTION_CAMERA"},
+        "manufacturer": {"type": "String", "value": "Keyence XG-X8000"}
+      },
+      "beliefs": {
+        "operational_state": {
+          "type": "Categorical",
+          "params": {"probs": {"RUNNING": 0.97, "IDLE": 0.02, "MAINTENANCE": 0.005, "FAILED": 0.005}},
+          "confidence": 0.98
+        }
+      }
+    }
+  ],
+  "edges": [
+    {"from": "SCL-SUPPLIER-AL-01", "to": "MAT-RAW-AL-6061", "type": "supplies_material", "weight": 0.93, "prior": "learned"},
+    {"from": "WO-2026-001", "to": "MAT-RAW-AL-6061", "type": "feeds_material", "weight": 1.0, "prior": "deterministic"},
+    {"from": "WO-2026-001", "to": "PRC-ASSEMBLE-BRACKET", "type": "executes_process", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASS-CNC-001", "to": "WO-2026-001", "type": "assigned_to_order", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASS-ROB-002", "to": "WO-2026-001", "type": "assigned_to_order", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASS-CVY-003", "to": "WO-2026-001", "type": "assigned_to_order", "weight": 1.0, "prior": "deterministic"},
+    {"from": "ASS-CNC-001", "to": "MAT-WIP-BRACKET-01", "type": "transforms_material", "weight": 0.88, "prior": "learned"},
+    {"from": "MAT-WIP-BRACKET-01", "to": "MAT-FIN-BRACKET-01", "type": "produces_material", "weight": 0.82, "prior": "learned"},
+    {"from": "QC-2026-001", "to": "MAT-FIN-BRACKET-01", "type": "monitors_quality", "weight": 0.97, "prior": "deterministic"}
+  ]
+}

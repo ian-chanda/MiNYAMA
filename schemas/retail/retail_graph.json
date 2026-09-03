@@ -1,0 +1,160 @@
+{
+  "schema_ref": "retail/Retail_Sector_Schema.md",
+  "generated_by": "MiNYAMA schema hardener",
+  "description": "Machine-readable graph representation of the Retail sector belief state (active-inference native form). Nodes are entities; beliefs are typed probability distributions; relations are typed, weighted edges.",
+  "meta": {
+    "representation": "graph",
+    "node_types": ["Customer", "Product", "InventoryItem", "CustomerInteraction", "Transaction", "DemandForecast"],
+    "edge_type_enum": ["purchases", "adds_to_cart", "views_product", "stocks_item", "stocks_product", "predicts_demand", "fulfills_transaction"],
+    "belief_attr_suffix": ["_model", "_dist", "_ref"],
+    "units_default": "usd"
+  },
+  "nodes": [
+    {
+      "id": "CUST-001",
+      "type": "Customer",
+      "attributes": {
+        "demographics": {"type": "Object", "value": {"age": 34, "segment": "PROFESSIONAL", "location": "URBAN"}},
+        "loyalty_status": {"type": "Enum", "value": "ACTIVE"}
+      },
+      "beliefs": {
+        "propensity_to_buy_model": {
+          "type": "Normal",
+          "params": {"mean_propensity": 0.72, "std_dev": 0.10},
+          "confidence": 0.84
+        }
+      }
+    },
+    {
+      "id": "CUST-002",
+      "type": "Customer",
+      "attributes": {
+        "demographics": {"type": "Object", "value": {"age": 22, "segment": "STUDENT", "location": "SUBURBAN"}},
+        "loyalty_status": {"type": "Enum", "value": "CHURN_RISK"}
+      },
+      "beliefs": {
+        "propensity_to_buy_model": {
+          "type": "Normal",
+          "params": {"mean_propensity": 0.35, "std_dev": 0.15},
+          "confidence": 0.72
+        }
+      }
+    },
+    {
+      "id": "PRD-WIRELESS-HEADSET",
+      "type": "Product",
+      "attributes": {
+        "product_id": {"type": "String", "value": "SKU-WHS-2026"},
+        "description": {"type": "String", "value": "ProAudio Wireless Noise-Cancelling Headset"},
+        "category": {"type": "String", "value": "Electronics"},
+        "price": {"type": "Float", "value": 249.99, "unit": "USD"},
+        "cost_of_goods_sold": {"type": "Float", "value": 82.50, "unit": "USD"},
+        "supplier_id": {"type": "String", "value": "SUP-PROAUDIO-01"}
+      }
+    },
+    {
+      "id": "PRD-ERGO-CHAIR",
+      "type": "Product",
+      "attributes": {
+        "product_id": {"type": "String", "value": "SKU-ERC-2026"},
+        "description": {"type": "String", "value": "ErgonomicMesh Office Chair"},
+        "category": {"type": "String", "value": "Furniture"},
+        "price": {"type": "Float", "value": 449.99, "unit": "USD"},
+        "cost_of_goods_sold": {"type": "Float", "value": 185.00, "unit": "USD"},
+        "supplier_id": {"type": "String", "value": "SUP-FURNWORLD-01"}
+      }
+    },
+    {
+      "id": "INV-WHS-WH-001",
+      "type": "InventoryItem",
+      "attributes": {
+        "location_id": {"type": "String", "value": "WAREHOUSE_EAST"},
+        "quantity": {"type": "Int", "value": 245},
+        "status": {"type": "Enum", "value": "AVAILABLE"}
+      }
+    },
+    {
+      "id": "INV-WHS-CH-001",
+      "type": "InventoryItem",
+      "attributes": {
+        "location_id": {"type": "String", "value": "WAREHOUSE_EAST"},
+        "quantity": {"type": "Int", "value": 38},
+        "status": {"type": "Enum", "value": "AVAILABLE"}
+      }
+    },
+    {
+      "id": "INV-STORE5-WH-001",
+      "type": "InventoryItem",
+      "attributes": {
+        "location_id": {"type": "String", "value": "STORE_5"},
+        "quantity": {"type": "Int", "value": 12},
+        "status": {"type": "Enum", "value": "AVAILABLE"}
+      }
+    },
+    {
+      "id": "INT-RETAIL-2026-001",
+      "type": "CustomerInteraction",
+      "attributes": {
+        "channel": {"type": "Enum", "value": "ONLINE"},
+        "interaction_type": {"type": "Enum", "value": "ADD_TO_CART"},
+        "outcome": {"type": "Enum", "value": "PURCHASE"},
+        "timestamp": {"type": "DateTime", "value": "2026-08-28T16:45:00Z"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "INT-RETAIL-2026-002",
+      "type": "CustomerInteraction",
+      "attributes": {
+        "channel": {"type": "Enum", "value": "MOBILE_APP"},
+        "interaction_type": {"type": "Enum", "value": "PAGE_VIEW"},
+        "outcome": {"type": "Enum", "value": "CART_ABANDONMENT"},
+        "timestamp": {"type": "DateTime", "value": "2026-08-28T18:10:00Z"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "TXN-RETAIL-2026-001",
+      "type": "Transaction",
+      "attributes": {
+        "total_price": {"type": "Float", "value": 249.99, "unit": "USD"},
+        "channel": {"type": "Enum", "value": "ONLINE"},
+        "items_purchased": {"type": "Array", "value": [{"product_id": "SKU-WHS-2026", "qty": 1}]},
+        "timestamp": {"type": "DateTime", "value": "2026-08-28T16:52:00Z"}
+      },
+      "is_observation": true
+    },
+    {
+      "id": "DF-WHS-WEEK36",
+      "type": "DemandForecast",
+      "attributes": {
+        "time_horizon": {"type": "String", "value": "2026-W36 (Sep 01-07)"},
+        "seasonality_model": {"type": "String", "value": "back_to_school_peak"}
+      },
+      "beliefs": {
+        "predicted_sales_distribution": {
+          "type": "Normal",
+          "params": {"mean_units": 82.0, "std_dev": 12.5},
+          "unit": "units/week",
+          "confidence": 0.83
+        },
+        "promotional_lift_model": {
+          "type": "Normal",
+          "params": {"mean_lift_percent": 25.0, "std_dev": 6.0},
+          "confidence": 0.74
+        }
+      }
+    }
+  ],
+  "edges": [
+    {"from": "INV-WHS-WH-001", "to": "PRD-WIRELESS-HEADSET", "type": "stocks_product", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INV-WHS-CH-001", "to": "PRD-ERGO-CHAIR", "type": "stocks_product", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INV-STORE5-WH-001", "to": "PRD-WIRELESS-HEADSET", "type": "stocks_product", "weight": 1.0, "prior": "deterministic"},
+    {"from": "CUST-001", "to": "INT-RETAIL-2026-001", "type": "adds_to_cart", "weight": 1.0, "prior": "deterministic"},
+    {"from": "CUST-002", "to": "INT-RETAIL-2026-002", "type": "views_product", "weight": 1.0, "prior": "deterministic"},
+    {"from": "INT-RETAIL-2026-001", "to": "TXN-RETAIL-2026-001", "type": "fulfills_transaction", "weight": 1.0, "prior": "deterministic"},
+    {"from": "TXN-RETAIL-2026-001", "to": "PRD-WIRELESS-HEADSET", "type": "purchases", "weight": 1.0, "prior": "deterministic"},
+    {"from": "TXN-RETAIL-2026-001", "to": "INV-WHS-WH-001", "type": "stocks_item", "weight": 0.95, "prior": "learned"},
+    {"from": "DF-WHS-WEEK36", "to": "PRD-WIRELESS-HEADSET", "type": "predicts_demand", "weight": 0.83, "prior": "learned"}
+  ]
+}
